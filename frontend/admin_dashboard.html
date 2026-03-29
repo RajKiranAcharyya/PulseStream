@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseStream - Admin Command Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/modern.css">
+</head>
+<body>
+    <div class="pulsestream-bg"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-nav">
+        <div class="container-fluid mx-4">
+            <a class="navbar-brand font-weight-bold d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="PulseStream" class="ps-logo mr-2"> PulseStream
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/logout"><i class="fa fa-sign-out mr-2"></i>LOGOUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid dashboard-wrapper">
+        <div class="sidebar">
+            <div class="glass-card p-3">
+                <h6 class="text-uppercase small text-muted mb-4 ml-2">Administration</h6>
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-dash-list" data-toggle="list" href="#list-dash"><i class="fa fa-th-large"></i>Overview</a>
+                    <a class="list-group-item list-group-item-action" id="list-doc-list" data-toggle="list" href="#list-doc"><i class="fa fa-user-md"></i>Doctors</a>
+                    <a class="list-group-item list-group-item-action" id="list-pat-list" data-toggle="list" href="#list-pat"><i class="fa fa-users"></i>Patients</a>
+                    <a class="list-group-item list-group-item-action" id="list-app-list" data-toggle="list" href="#list-app"><i class="fa fa-calendar"></i>Appointments</a>
+                    <a class="list-group-item list-group-item-action" id="list-pres-list" data-toggle="list" href="#list-pres"><i class="fa fa-file-text-o"></i>Prescriptions</a>
+                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"><i class="fa fa-plus-square"></i>Add Doctor</a>
+                    <a class="list-group-item list-group-item-action" id="list-mes-list" data-toggle="list" href="#list-mes"><i class="fa fa-envelope"></i>Queries</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Overview Dash -->
+                <div class="tab-pane fade show active" id="list-dash" role="tabpanel">
+                    <h2 class="mb-4 font-weight-bold">Command Center</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4" onclick="$('#list-doc-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-user-md fa-2x"></i><h5>Doctor Registry</h5><p class="small text-muted mb-0">Manage medical staff</p></div>
+                        </div>
+                        <div class="col-md-4 mb-4" onclick="$('#list-pat-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-users fa-2x"></i><h5>Patient Directory</h5><p class="small text-muted mb-0">Demographics & Files</p></div>
+                        </div>
+                        <div class="col-md-4 mb-4" onclick="$('#list-app-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-calendar-check-o fa-2x"></i><h5>System Schedule</h5><p class="small text-muted mb-0">Global appointments</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-doc" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <h4 class="mb-4">Medical Staff Directory</h4>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead><tr><th>DOCTOR NAME</th><th>SPECIALIZATION</th><th>EMAIL</th><th>FEES</th><th>ACTIONS</th></tr></thead>
+                                <tbody id="docBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-pat" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <h4 class="mb-4">Patient Registry</h4>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead><tr><th>ID</th><th>NAME</th><th>GENDER</th><th>EMAIL</th><th>CONTACT</th><th>ACTIONS</th></tr></thead>
+                                <tbody id="patBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-app" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <h4 class="mb-4">Global Appointment History</h4>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead><tr><th>ID</th><th>PATIENT</th><th>DOCTOR</th><th>FEES</th><th>DATE</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+                                <tbody id="appDetailsBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-pres" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <h4 class="mb-4">Clinical Prescriptions Log</h4>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead><tr><th>APP ID</th><th>PATIENT</th><th>DOCTOR</th><th>DATE</th><th>DISEASE</th><th>PRESCRIPTION</th><th>ACTIONS</th></tr></thead>
+                                <tbody id="presDetailsBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-settings" role="tabpanel">
+                    <div class="glass-card p-5">
+                        <h4 class="mb-4">Onboard New Medical Professional</h4>
+                        <form id="addDocForm" class="row">
+                            <div class="col-md-6 mb-3"><label class="small text-white-50">Full Name</label><input type="text" name="username" class="form-control-modern form-control" required></div>
+                            <div class="col-md-6 mb-3">
+                                <label class="small text-white-50">Specialization</label>
+                                <select name="spec" class="form-control-modern form-control" required>
+                                    <option value="General">General</option>
+                                    <option value="Cardiologist">Cardiologist</option>
+                                    <option value="Pediatrician">Pediatrician</option>
+                                    <option value="Neurologist">Neurologist</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3"><label class="small text-white-50">Email / Login ID</label><input type="email" name="email" class="form-control-modern form-control" required></div>
+                            <div class="col-md-6 mb-3"><label class="small text-white-50">Password</label><input type="password" name="password" class="form-control-modern form-control" required></div>
+                            <div class="col-md-6 mb-3"><label class="small text-white-50">Consultancy Fees ($)</label><input type="number" name="docFees" class="form-control-modern form-control" required></div>
+                            <div class="col-md-12 mt-3"><button type="submit" class="btn-pulse px-5">Register Doctor</button></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-mes" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <h4 class="mb-4">Patient Queries & Feedback</h4>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead><tr><th>NAME</th><th>EMAIL</th><th>CONTACT</th><th>MESSAGE</th></tr></thead>
+                                <tbody id="mesBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Pad Modal -->
+    <div id="padModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content glass-card p-0 overflow-hidden" style="border: 1px solid var(--glass-border); background: #fff; color: #333;">
+                <div class="p-5" id="printArea">
+                    <div class="d-flex justify-content-between mb-5 border-bottom pb-4" style="border-color: #eee !important;">
+                        <div>
+                            <img src="images/logo.png" style="height: 50px;" class="mb-2">
+                            <h4 class="font-weight-bold mb-0 text-primary">PulseStream</h4>
+                            <p class="small text-muted mb-0">Premium Healthcare Services</p>
+                        </div>
+                        <div class="text-right">
+                            <h5 class="font-weight-bold mb-1">MEDICAL PRESCRIPTION</h5>
+                            <p class="small text-muted mb-0" id="padDate"></p>
+                            <p class="small text-muted mb-0" id="padRef"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <label class="small text-muted text-uppercase font-weight-bold d-block">Patient Details</label>
+                            <h6 class="font-weight-bold mb-0" id="padPatName"></h6>
+                            <p class="small text-muted" id="padPatID"></p>
+                        </div>
+                        <div class="col-6 text-right">
+                            <label class="small text-muted text-uppercase font-weight-bold d-block">Consulting Doctor</label>
+                            <h6 class="font-weight-bold mb-0" id="padDocName"></h6>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="small text-muted text-uppercase font-weight-bold d-block mb-3">Clinical Diagnosis</label>
+                        <p class="px-3 py-2 bg-light rounded" id="padSymptoms" style="border-left: 4px solid var(--primary); min-height: 50px;"></p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="small text-muted text-uppercase font-weight-bold d-block mb-3">Medical Prescription (Rx)</label>
+                        <div class="px-3 py-2" id="padRx" style="white-space: pre-line; font-size: 1.1rem; border: 1px dashed #ddd; min-height: 150px;"></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-5 pt-4 border-top" style="border-color: #eee !important;">
+                        <div class="small text-muted italic">This is a digitally generated prescription from PulseStream Platform.</div>
+                        <div class="text-center">
+                            <div style="border-top: 1px solid #333; width: 150px; margin-top: 20px;"></div>
+                            <p class="small font-weight-bold mt-1">Authorized Seal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 bg-dark d-flex justify-content-end border-0">
+                    <button class="btn btn-outline-light mr-2" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" onclick="printPad()"><i class="fa fa-print mr-2"></i>Download / Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/modern.js"></script>
+</body>
+</html>
+

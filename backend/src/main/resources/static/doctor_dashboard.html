@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseStream - Doctor Dashboard</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+    <div class="pulsestream-bg"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-nav">
+        <div class="container-fluid mx-4">
+            <a class="navbar-brand font-weight-bold d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="PulseStream" class="ps-logo mr-2"> PulseStream
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/logout"><i
+                                class="fa fa-sign-out mr-2"></i>LOGOUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid dashboard-wrapper">
+        <div class="sidebar">
+            <div class="glass-card h-100 p-3">
+                <h6 class="text-uppercase small text-muted mb-4 ml-2">Clinical Portal</h6>
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-dash-list" data-toggle="list"
+                        href="#list-dash"><i class="fa fa-home"></i>Home</a>
+                    <a class="list-group-item list-group-item-action" id="list-app-list" data-toggle="list"
+                        href="#list-app"><i class="fa fa-calendar-check-o"></i>Appointments</a>
+                    <a class="list-group-item list-group-item-action" id="list-avail-list" data-toggle="list"
+                        href="#list-avail"><i class="fa fa-clock-o"></i>Availability</a>
+                    <a class="list-group-item list-group-item-action" id="list-prof-list" data-toggle="list"
+                        href="#list-prof"><i class="fa fa-user-circle"></i>Clinical Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-dash" role="tabpanel">
+                    <h2 class="mb-4 font-weight-bold">Clinical Workspace</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4" onclick="$('#list-app-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-users fa-2x"></i>
+                                <h5>Patient Queue</h5>
+                                <p class="small text-muted mb-0">Manage active appointments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4" onclick="$('#list-avail-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-calendar-plus-o fa-2x"></i>
+                                <h5>Work Slots</h5>
+                                <p class="small text-muted mb-0">Set your consultation hours</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4" onclick="$('#list-prof-list').tab('show')">
+                            <div class="glass-card stat-card"><i class="fa fa-address-card-o fa-2x"></i>
+                                <h5>Professional ID</h5>
+                                <p class="small text-muted mb-0">Fees, Spec & security</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-app" role="tabpanel">
+                    <div class="glass-card p-4">
+                        <div class="row mb-4 align-items-center">
+                            <div class="col">
+                                <h4>Active Appointment Queue</h4>
+                            </div>
+                            <div class="col-md-4"><input type="text" id="appSearch"
+                                    class="form-control-modern form-control px-3 py-1 mt-2 mb-2"
+                                    placeholder="Search by Contact Number..."></div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>PATIENT</th>
+                                        <th>GENDER</th>
+                                        <th>DATE</th>
+                                        <th>TIME</th>
+                                        <th>STATUS</th>
+                                        <th>ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="list-avail" role="tabpanel">
+                    <div class="glass-card p-5 mb-4">
+                        <h4 class="mb-4">Configure Working Hours</h4>
+                        <form id="availForm" class="row align-items-end">
+                            <div class="col-md-3 mb-3">
+                                <label class="small text-white-50">Day of Week</label>
+                                <select name="dayOfWeek" class="form-control-modern form-control" required>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="small text-white-50">Start Time</label>
+                                <input type="time" name="startTime" class="form-control-modern form-control" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="small text-white-50">End Time</label>
+                                <input type="time" name="endTime" class="form-control-modern form-control" required>
+                            </div>
+                            <div class="col-md-3 mb-3"><button type="submit" class="btn-pulse w-100">Add Slot</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="glass-card p-4">
+                        <h5 class="mb-4">Existing Schedule Slots</h5>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>DAY</th>
+                                    <th>START</th>
+                                    <th>END</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="availBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Profile Management -->
+                <div class="tab-pane fade" id="list-prof" role="tabpanel">
+                    <div class="glass-card p-5">
+                        <h4 class="mb-4">Clinical Profile Settings</h4>
+                        <form id="profileForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="small text-white-50">Professional Name</label>
+                                    <input type="text" name="username" class="form-control-modern form-control"
+                                        required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="small text-white-50">Email (ID)</label>
+                                    <input type="email" class="form-control-modern form-control text-muted"
+                                        id="profEmail" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="small text-white-50">Specialization</label>
+                                    <input type="text" name="spec" class="form-control-modern form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="small text-white-50">Consultancy Fee ($)</label>
+                                    <input type="number" name="docFees" class="form-control-modern form-control"
+                                        required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="small text-white-50">Security: Update Password (leave blank to keep
+                                        current)</label>
+                                    <input type="password" name="password" class="form-control-modern form-control"
+                                        placeholder="••••••••">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-pulse mt-4 px-5">Save Professional Details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="presModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card p-4" style="border: 1px solid var(--glass-border);">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title">Clinical Consultation</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="presForm">
+                        <input type="hidden" name="pid" id="pid">
+                        <input type="hidden" name="appointmentId" id="appId">
+                        <div class="form-group mb-4">
+                            <label class="small text-accent font-weight-bold">Apply Clinical Protocol (Smart Preset)</label>
+                            <select id="presPreset" class="form-control-modern form-control">
+                                <option value="">-- Manual Entry --</option>
+                                <option value="flu">Common Flu / Chronic Fever</option>
+                                <option value="migraine">Severe Migraine Relief</option>
+                                <option value="hypertension">Hypertension (BP) Management</option>
+                                <option value="wellness">General Wellness & Vitamins</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label class="small text-white-50">Diagnosed Symptoms</label><textarea
+                                class="form-control-modern form-control" name="disease" id="disease" rows="3"
+                                required></textarea></div>
+                        <div class="form-group"><label class="small text-white-50">Medical Prescription</label><textarea
+                                class="form-control-modern form-control" name="prescription" id="prescription" rows="5"
+                                required></textarea></div>
+                        <button type="submit" class="btn-pulse w-100 mt-3" style="position: relative; z-index: 100;">Finalize & Sync</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/modern.js"></script>
+</body>
+
+</html>
