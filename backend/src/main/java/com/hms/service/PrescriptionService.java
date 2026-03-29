@@ -4,10 +4,12 @@ import com.hms.entity.Prescription;
 import com.hms.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class PrescriptionService {
 
     @Autowired

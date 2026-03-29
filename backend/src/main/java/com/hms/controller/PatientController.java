@@ -23,7 +23,7 @@ public class PatientController {
 
     @Autowired
     private AppointmentService appointmentService;
-    
+
     @Autowired
     private PrescriptionService prescriptionService;
 
@@ -80,7 +80,7 @@ public class PatientController {
         appointmentService.cancelByPatient(id);
         return ResponseEntity.ok("Cancelled");
     }
-    
+
     @GetMapping("/prescriptions")
     public ResponseEntity<?> getPrescriptions(Authentication auth) {
         String email = auth.getName();
@@ -99,11 +99,12 @@ public class PatientController {
         if (doctorOpt.isPresent()) {
             Doctor d = doctorOpt.get();
             List<com.hms.entity.Availability> allSlots = availabilityService.getDoctorAvailability(d.getEmail());
-            
+
             List<com.hms.entity.Availability> availableSlots = allSlots.stream().filter(s -> {
                 // Filter by day/date
                 boolean booked = appointmentService.isSlotBooked(doctorName, localDate, s.getStartTime());
-                if (booked) return false;
+                if (booked)
+                    return false;
 
                 // Filter by time if today
                 if (localDate.equals(today)) {
@@ -128,8 +129,10 @@ public class PatientController {
     public ResponseEntity<?> updateProfile(@RequestBody com.hms.entity.Patient patient, Authentication auth) {
         return patientService.getPatientByEmail(auth.getName()).map(existing -> {
             existing.setContact(patient.getContact());
-            if (patient.getFname() != null) existing.setFname(patient.getFname());
-            if (patient.getLname() != null) existing.setLname(patient.getLname());
+            if (patient.getFname() != null)
+                existing.setFname(patient.getFname());
+            if (patient.getLname() != null)
+                existing.setLname(patient.getLname());
             if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
                 existing.setPassword(passwordEncoder.encode(patient.getPassword()));
             }

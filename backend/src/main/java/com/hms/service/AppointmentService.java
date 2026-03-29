@@ -4,10 +4,12 @@ import com.hms.entity.Appointment;
 import com.hms.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class AppointmentService {
 
     @Autowired
@@ -31,9 +33,9 @@ public class AppointmentService {
         appointment.setUserStatus(1);
         appointment.setDoctorStatus(1);
         Appointment saved = appointmentRepository.save(appointment);
-        emailService.sendEmail(saved.getEmail(), "Appointment Booked", 
-            "Dear " + saved.getFname() + ",\n\nYour appointment with Dr. " + saved.getDoctor() + 
-            " has been booked for " + saved.getAppdate() + " at " + saved.getApptime() + ".\n\nThank you!");
+        emailService.sendEmail(saved.getEmail(), "Appointment Booked",
+                "Dear " + saved.getFname() + ",\n\nYour appointment with Dr. " + saved.getDoctor() +
+                        " has been booked for " + saved.getAppdate() + " at " + saved.getApptime() + ".\n\nThank you!");
         return saved;
     }
 
@@ -53,8 +55,9 @@ public class AppointmentService {
         appointmentRepository.findById(id).ifPresent(a -> {
             a.setUserStatus(0);
             appointmentRepository.save(a);
-            emailService.sendEmail(a.getEmail(), "Appointment Cancelled", 
-                "Your appointment with Dr. " + a.getDoctor() + " on " + a.getAppdate() + " has been cancelled by you.");
+            emailService.sendEmail(a.getEmail(), "Appointment Cancelled",
+                    "Your appointment with Dr. " + a.getDoctor() + " on " + a.getAppdate()
+                            + " has been cancelled by you.");
         });
     }
 
@@ -62,8 +65,9 @@ public class AppointmentService {
         appointmentRepository.findById(id).ifPresent(a -> {
             a.setDoctorStatus(0);
             appointmentRepository.save(a);
-            emailService.sendEmail(a.getEmail(), "Appointment Cancelled by Doctor", 
-                "Your appointment with Dr. " + a.getDoctor() + " on " + a.getAppdate() + " has been cancelled by the doctor.");
+            emailService.sendEmail(a.getEmail(), "Appointment Cancelled by Doctor",
+                    "Your appointment with Dr. " + a.getDoctor() + " on " + a.getAppdate()
+                            + " has been cancelled by the doctor.");
         });
     }
 
@@ -71,8 +75,9 @@ public class AppointmentService {
         appointmentRepository.findById(id).ifPresent(a -> {
             a.setDoctorStatus(2); // 2: Prescribed
             appointmentRepository.save(a);
-            emailService.sendEmail(a.getEmail(), "Prescription Issued", 
-                "Dr. " + a.getDoctor() + " has issued a prescription for your appointment on " + a.getAppdate() + ". Please check your dashboard.");
+            emailService.sendEmail(a.getEmail(), "Prescription Issued",
+                    "Dr. " + a.getDoctor() + " has issued a prescription for your appointment on " + a.getAppdate()
+                            + ". Please check your dashboard.");
         });
     }
 
