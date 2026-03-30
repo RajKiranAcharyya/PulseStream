@@ -1,6 +1,9 @@
 package com.hms.controller;
 
+import com.hms.dto.AppointmentBookingDTO;
+import com.hms.dto.PatientProfileDTO;
 import com.hms.entity.Appointment;
+import com.hms.entity.Doctor;
 import com.hms.service.AppointmentService;
 import com.hms.service.AvailabilityService;
 import com.hms.service.DoctorService;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import com.hms.entity.Doctor;
 
 @RestController
 @RequestMapping("/api/patient")
@@ -48,15 +50,14 @@ public class PatientController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<?> bookAppointment(@RequestBody Appointment appointment, Authentication auth) {
+    public ResponseEntity<?> bookAppointment(@RequestBody AppointmentBookingDTO dto, Authentication auth) {
         java.time.LocalDate today = java.time.LocalDate.now();
-        if (appointment.getAppdate().isBefore(today)) {
+        if (dto.getAppdate().isBefore(today)) {
             return ResponseEntity.badRequest().body("Cannot book appointments for past dates.");
         }
-        if (appointment.getAppdate().equals(today)) {
+        if (dto.getAppdate().equals(today)) {
             java.time.LocalTime now = java.time.LocalTime.now();
-            java.time.LocalTime appTime = appointment.getApptime();
-            if (appTime.isBefore(now)) {
+            if (dto.getApptime().isBefore(now)) {
                 return ResponseEntity.badRequest().body("This time slot has already passed for today.");
             }
         }
@@ -64,12 +65,23 @@ public class PatientController {
         String email = auth.getName();
         return patientService.getPatientByEmail(email)
                 .map(p -> {
+                    // SECURE MAPPING: Only use verified data from session and limited DTO fields
+                    Appointment appointment = new Appointment();
                     appointment.setPid(p.getPid());
                     appointment.setFname(p.getFname());
                     appointment.setLname(p.getLname());
                     appointment.setEmail(p.getEmail());
                     appointment.setGender(p.getGender());
                     appointment.setContact(p.getContact());
+
+                    // Fields from User input (Validated)
+                    appointment.setDoctor(dto.getDoctor());
+                    appointment.setAppdate(dto.getAppdate());
+                    appointment.setApptime(dto.getApptime());
+                    appointment.setDisease(dto.getDisease());
+                    appointment.setAge(dto.getAge());
+                    appointment.setDocFees(dto.getDocFees());
+
                     return ResponseEntity.ok(appointmentService.bookAppointment(appointment));
                 })
                 .orElse(ResponseEntity.badRequest().build());
@@ -102,11 +114,9 @@ public class PatientController {
             List<java.time.LocalTime> occupiedTimes = appointmentService.getOccupiedTimes(doctorName, localDate);
 
             List<com.hms.entity.Availability> availableSlots = allSlots.stream().filter(s -> {
-                // Filter by day/date
                 if (occupiedTimes.contains(s.getStartTime()))
                     return false;
 
-                // Filter by time if today
                 if (localDate.equals(today)) {
                     java.time.LocalTime slotTime = s.getStartTime();
                     return slotTime.isAfter(now);
@@ -126,15 +136,17 @@ public class PatientController {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(@RequestBody com.hms.entity.Patient patient, Authentication auth) {
+    public ResponseEntity<?> updateProfile(@RequestBody PatientProfileDTO dto, Authentication auth) {
         return patientService.getPatientByEmail(auth.getName()).map(existing -> {
-            existing.setContact(patient.getContact());
-            if (patient.getFname() != null)
-                existing.setFname(patient.getFname());
-            if (patient.getLname() != null)
-                existing.setLname(patient.getLname());
-            if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
-                existing.setPassword(passwordEncoder.encode(patient.getPassword()));
+            // SECURE MAPPING: Users cannot change their PID or Email
+            if (dto.getContact() != null)
+                existing.setContact(dto.getContact());
+            if (dto.getFname() != null)
+                existing.setFname(dto.getFname());
+            if (dto.getLname() != null)
+                existing.setLname(dto.getLname());
+            if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+                existing.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
             return ResponseEntity.ok(patientService.savePatient(existing));
         }).orElse(ResponseEntity.badRequest().build());

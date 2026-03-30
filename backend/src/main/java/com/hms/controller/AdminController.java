@@ -1,5 +1,6 @@
 package com.hms.controller;
 
+import com.hms.dto.DoctorRegistrationDTO;
 import com.hms.entity.Doctor;
 import com.hms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,15 @@ public class AdminController {
     }
 
     @PostMapping("/add-doctor")
-    public ResponseEntity<?> addDoctor(@RequestBody Doctor doctor) {
+    public ResponseEntity<?> addDoctor(@RequestBody DoctorRegistrationDTO dto) {
+        // MAPPING: DTO -> Entity
+        Doctor doctor = new Doctor();
+        doctor.setUsername(dto.getUsername());
+        doctor.setEmail(dto.getEmail());
+        doctor.setSpec(dto.getSpec());
+        doctor.setDocFees(dto.getDocFees());
+        doctor.setPassword(dto.getPassword());
+        
         return ResponseEntity.ok(doctorService.addDoctor(doctor));
     }
 

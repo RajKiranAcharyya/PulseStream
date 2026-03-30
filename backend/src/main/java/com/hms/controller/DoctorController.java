@@ -1,5 +1,8 @@
 package com.hms.controller;
 
+import com.hms.dto.AvailabilityDTO;
+import com.hms.dto.DoctorProfileDTO;
+import com.hms.dto.PrescriptionDTO;
 import com.hms.entity.Availability;
 import com.hms.entity.Prescription;
 import com.hms.service.AppointmentService;
@@ -46,9 +49,14 @@ public class DoctorController {
     }
 
     @PostMapping("/prescribe")
-    public ResponseEntity<?> prescribe(@RequestBody Prescription prescription, Authentication auth) {
-        if (prescription.getAppointmentId() != null) {
-            appointmentService.getAppointmentById(prescription.getAppointmentId()).ifPresent(app -> {
+    public ResponseEntity<?> prescribe(@RequestBody PrescriptionDTO dto, Authentication auth) {
+        Prescription prescription = new Prescription();
+        prescription.setAppointmentId(dto.getAppointmentId());
+        prescription.setPrescription(dto.getPrescription());
+        prescription.setDisease(dto.getDisease());
+
+        if (dto.getAppointmentId() != null) {
+            appointmentService.getAppointmentById(dto.getAppointmentId()).ifPresent(app -> {
                 prescription.setFname(app.getFname());
                 prescription.setLname(app.getLname());
                 prescription.setPid(app.getPid());
@@ -56,13 +64,14 @@ public class DoctorController {
                 prescription.setApptime(app.getApptime());
             });
         }
+        
         String email = auth.getName();
         doctorService.getDoctorByEmail(email).ifPresent(d -> prescription.setDoctor(d.getUsername()));
         if (prescription.getDoctor() == null) prescription.setDoctor(email);
         
         Prescription saved = prescriptionService.savePrescription(prescription);
-        if (prescription.getAppointmentId() != null) {
-            appointmentService.prescribeByDoctor(prescription.getAppointmentId());
+        if (dto.getAppointmentId() != null) {
+            appointmentService.prescribeByDoctor(dto.getAppointmentId());
         }
         return ResponseEntity.ok(saved);
     }
@@ -73,8 +82,13 @@ public class DoctorController {
     }
 
     @PostMapping("/availability")
-    public ResponseEntity<?> addAvailability(@RequestBody Availability availability, Authentication auth) {
+    public ResponseEntity<?> addAvailability(@RequestBody AvailabilityDTO dto, Authentication auth) {
+        Availability availability = new Availability();
         availability.setDoctorEmail(auth.getName());
+        availability.setDayOfWeek(dto.getDayOfWeek());
+        availability.setStartTime(dto.getStartTime());
+        availability.setEndTime(dto.getEndTime());
+        
         return ResponseEntity.ok(availabilityService.addAvailability(availability));
     }
 
@@ -92,13 +106,13 @@ public class DoctorController {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(@RequestBody com.hms.entity.Doctor doctor, Authentication auth) {
+    public ResponseEntity<?> updateProfile(@RequestBody DoctorProfileDTO dto, Authentication auth) {
         return doctorService.getDoctorByEmail(auth.getName()).map(existing -> {
-            if (doctor.getUsername() != null) existing.setUsername(doctor.getUsername());
-            if (doctor.getSpec() != null) existing.setSpec(doctor.getSpec());
-            if (doctor.getDocFees() != null) existing.setDocFees(doctor.getDocFees());
-            if (doctor.getPassword() != null && !doctor.getPassword().isEmpty()) {
-                existing.setPassword(passwordEncoder.encode(doctor.getPassword()));
+            if (dto.getUsername() != null) existing.setUsername(dto.getUsername());
+            if (dto.getSpec() != null) existing.setSpec(dto.getSpec());
+            if (dto.getDocFees() != null) existing.setDocFees(dto.getDocFees());
+            if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+                existing.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
             return ResponseEntity.ok(doctorService.saveDoctor(existing));
         }).orElse(ResponseEntity.badRequest().build());
