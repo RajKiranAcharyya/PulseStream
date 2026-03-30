@@ -99,11 +99,11 @@ public class PatientController {
         if (doctorOpt.isPresent()) {
             Doctor d = doctorOpt.get();
             List<com.hms.entity.Availability> allSlots = availabilityService.getDoctorAvailability(d.getEmail());
+            List<java.time.LocalTime> occupiedTimes = appointmentService.getOccupiedTimes(doctorName, localDate);
 
             List<com.hms.entity.Availability> availableSlots = allSlots.stream().filter(s -> {
                 // Filter by day/date
-                boolean booked = appointmentService.isSlotBooked(doctorName, localDate, s.getStartTime());
-                if (booked)
+                if (occupiedTimes.contains(s.getStartTime()))
                     return false;
 
                 // Filter by time if today

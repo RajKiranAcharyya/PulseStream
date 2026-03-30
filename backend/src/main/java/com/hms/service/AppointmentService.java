@@ -23,7 +23,11 @@ public class AppointmentService {
     }
 
     public boolean isSlotBooked(String doctor, java.time.LocalDate date, java.time.LocalTime time) {
-        return appointmentRepository.isSlotOccupied(doctor, date, time);
+        return appointmentRepository.findOccupiedTimes(doctor, date).contains(time);
+    }
+
+    public List<java.time.LocalTime> getOccupiedTimes(String doctor, java.time.LocalDate date) {
+        return appointmentRepository.findOccupiedTimes(doctor, date);
     }
 
     public Appointment bookAppointment(Appointment appointment) {
