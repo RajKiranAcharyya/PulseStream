@@ -44,6 +44,13 @@ public class AdminController {
 
     @PostMapping("/add-doctor")
     public ResponseEntity<?> addDoctor(@RequestBody DoctorRegistrationDTO dto) {
+        if (doctorService.getDoctorByEmail(dto.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Doctor with this email already exists");
+        }
+        if (doctorService.getDoctorByUsername(dto.getUsername()).isPresent()) {
+            return ResponseEntity.badRequest().body("Doctor with this username already exists");
+        }
+        
         // MAPPING: DTO -> Entity
         Doctor doctor = new Doctor();
         doctor.setUsername(dto.getUsername());

@@ -24,9 +24,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/index.html", "/index1.html", "/services.html", "/contact.html", "/forgot_password.html", "/reset_password.html", "/*.css", "/css/**", "/js/**", "/images/**", "/assets/**", "/fonts/**", "/vendor/**", "/font-awesome/**").permitAll()
                 .requestMatchers("/api/public/**", "/api/auth/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/doctor/**").hasRole("DOCTOR")
-                .requestMatchers("/patient/**").hasRole("PATIENT")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/doctor/**").hasRole("DOCTOR")
+                .requestMatchers("/api/patient/**").hasRole("PATIENT")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
