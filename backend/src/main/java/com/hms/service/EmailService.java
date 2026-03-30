@@ -14,6 +14,7 @@ public class EmailService {
 
     @Async
     public void sendEmail(String to, String subject, String body) {
+        System.out.println("DEBUG: Attempting to send email to " + to);
         if (mailSender == null) {
             System.out.println(
                     "Email Service Not Configured. Content: \nTo: " + to + "\nSubject: " + subject + "\nBody: " + body);
