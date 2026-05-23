@@ -9,8 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableWebSecurity
@@ -44,6 +48,12 @@ public class SecurityConfig {
                 .requestMatchers("/patient_dashboard.html", "/api/patient/**").hasRole("PATIENT")
                 .anyRequest().authenticated()
             )
+            .formLogin(form -> form
+                .loginProcessingUrl("/login")
+                .successHandler(roleBasedSuccessHandler())
+                .failureHandler(loginFailureHandler())
+                .permitAll()
+            )
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/index.html")
@@ -52,4 +62,49 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    /**
+     * Redirects authenticated users to their role-appropriate dashboard.
+     */
+    @Bean
+    public AuthenticationSuccessHandler roleBasedSuccessHandler() {
+        return (request, response, authentication) -> {
+            String role = authentication.getAuthorities().iterator().next().getAuthority();
+            switch (role) {
+                case "ROLE_ADMIN":
+                    response.sendRedirect("/admin_dashboard.html");
+                    break;
+                case "ROLE_DOCTOR":
+                    response.sendRedirect("/doctor_dashboard.html");
+                    break;
+                case "ROLE_PATIENT":
+                    response.sendRedirect("/patient_dashboard.html");
+                    break;
+                default:
+                    response.sendRedirect("/index.html");
+            }
+        };
+    }
+
+    /**
+     * Redirects back to the originating login page with an error parameter.
+     * Uses the 'loginRole' form field to determine which page to return to.
+     */
+    @Bean
+    public AuthenticationFailureHandler loginFailureHandler() {
+        return (request, response, exception) -> {
+            String loginRole = request.getParameter("loginRole");
+            String redirectUrl;
+
+            if ("PATIENT".equals(loginRole)) {
+                redirectUrl = "/index1.html?error=true";
+            } else {
+                // Doctor and Admin login forms are on index.html
+                redirectUrl = "/index.html?error=true";
+            }
+
+            response.sendRedirect(redirectUrl);
+        };
+    }
 }
+

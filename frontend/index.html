@@ -75,8 +75,9 @@
                         </div>
 
                         <div class="tab-pane fade" id="profile" role="tabpanel">
-                            <form action="/login/doctor" method="post" class="mt-4">
+                            <form action="/login" method="post" class="mt-4">
                                 <input type="hidden" name="tab" value="profile">
+                                <input type="hidden" name="loginRole" value="DOCTOR">
                                 <div class="form-group"><input type="text" class="form-control-modern form-control" placeholder="Doctor Username *" name="username" required /></div>
                                 <div class="form-group"><input type="password" class="form-control-modern form-control" placeholder="Password *" name="password" required /></div>
                                 <input type="submit" class="btnRegister" value="Login" />
@@ -85,8 +86,9 @@
                         </div>
 
                         <div class="tab-pane fade" id="admin" role="tabpanel">
-                            <form action="/login/admin" method="post" class="mt-4">
+                            <form action="/login" method="post" class="mt-4">
                                 <input type="hidden" name="tab" value="admin">
+                                <input type="hidden" name="loginRole" value="ADMIN">
                                 <div class="form-group"><input type="text" class="form-control-modern form-control" placeholder="Admin Username *" name="username" required /></div>
                                 <div class="form-group"><input type="password" class="form-control-modern form-control" placeholder="Password *" name="password" required /></div>
                                 <input type="submit" class="btnRegister" value="Login" />
