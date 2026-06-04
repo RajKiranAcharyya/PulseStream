@@ -1,6 +1,6 @@
 # 🏥 PulseStream Clinical Platform: High-Performance Healthcare SaaS
 
-PulseStream is a sophisticated, production-grade clinical management system engineered for institutional-scale healthcare operations. It optimizes the balance between low-latency user experience and high-integrity medical scheduling.
+PulseStream is a clinical management system engineered for institutional-scale healthcare operations. 
 
 # Live link: https://pulsestream-rblw.onrender.com
 
@@ -13,8 +13,8 @@ PulseStream is a sophisticated, production-grade clinical management system engi
 ## 🏗️ Core Engineering Highlights
 This project was built with a focus on **Enterprise Patterns** and **Performance Optimization**:
 
-*   **⚡ Asynchronous Clinical Workflows**: Engineered a high-performance **Asynchronous Email Threading** system using Spring's `@Async` thread pools, reducing clinical booking latency from ~3s to **<500ms**.
-*   **⏰ Automated Clinical Operations (Cron Jobs)**: Designed a complex **Email Cron Job** scheduler (`@Scheduled`) to handle daily clinical reminders and automated status synchronization without human intervention.
+*   **⚡ Asynchronous Clinical Workflows**: Engineered a high-performance **Asynchronous Email Threading** system using Spring's `@Async` thread pools.
+*   *   **⏰ Automated Clinical Operations (Cron Jobs)**: Designed a complex **Email Cron Job** scheduler (`@Scheduled`) to handle daily clinical reminders and automated status synchronization without human intervention.
 *   **🧩 Real-Time Availability Engine**: Implemented a precise concurrency engine with custom JPQL logic to ensure exactly-once booking and real-time slot release upon clinical cancellations.
 *   **💎 Clearview Design System**: A custom-architected high-contrast glassmorphic UI, optimized for high-performance dashboards across 9 distinct user portals (Admin, Doctor, Patient, etc.).
 
