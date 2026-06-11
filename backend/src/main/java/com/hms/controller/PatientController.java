@@ -49,6 +49,10 @@ public class PatientController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/doctors")
+    public ResponseEntity<?> getDoctor(){
+        return ResponseEntity.ok(doctorService.getAllDoctors());
+    }
     @PostMapping("/book")
     public ResponseEntity<?> bookAppointment(@RequestBody AppointmentBookingDTO dto, Authentication auth) {
         java.time.LocalDate today = java.time.LocalDate.now();
