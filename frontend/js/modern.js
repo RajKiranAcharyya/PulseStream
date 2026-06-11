@@ -16,7 +16,7 @@ $(document).ready(function () {
     });
 
     if ($('#bookForm').length > 0) {
-        $.get('/api/admin/doctors', function (docs) {
+        $.get('/api/patient/doctors', function (docs) {
             $('#spec').change(function () {
                 const spec = $(this).val();
                 const filtered = docs.filter(d => d.spec === spec);
