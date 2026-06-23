@@ -115,4 +115,11 @@ public class PatientTest {
         obj.setLname("Davis");
         assertEquals("Davis", obj.getLname());
     }
+
+    @Test
+    public void testSetGender_Variant1() {
+        Patient obj = new Patient();
+        obj.setGender("Female");
+        assertEquals("Female", obj.getGender());
+    }
 }
