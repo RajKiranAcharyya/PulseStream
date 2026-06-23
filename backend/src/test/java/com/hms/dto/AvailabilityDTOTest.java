@@ -13,4 +13,15 @@ public class AvailabilityDTOTest {
         assertNull(dto.getStartTime());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        LocalTime start = LocalTime.of(9, 0);
+        LocalTime end = LocalTime.of(17, 0);
+        AvailabilityDTO dto = new AvailabilityDTO("Monday", start, end);
+
+        assertEquals("Monday", dto.getDayOfWeek());
+        assertEquals(start, dto.getStartTime());
+        assertEquals(end, dto.getEndTime());
+    }
+
 }
