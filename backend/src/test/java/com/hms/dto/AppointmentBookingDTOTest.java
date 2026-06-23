@@ -140,4 +140,11 @@ public class AppointmentBookingDTOTest {
         obj.setAge(50);
         assertEquals(50, obj.getAge());
     }
+
+    @Test
+    public void testSetDocfees_Variant1() {
+        AppointmentBookingDTO obj = new AppointmentBookingDTO();
+        obj.setDocFees(300);
+        assertEquals(300, obj.getDocFees());
+    }
 }
