@@ -48,4 +48,11 @@ public class AvailabilityTest {
         assertEquals(av1.hashCode(), av2.hashCode());
         assertNotNull(av1.toString());
     }
+
+    @Test
+    public void testSetDoctoremail_Variant1() {
+        Availability obj = new Availability();
+        obj.setDoctorEmail("doc_smith@gmail.com");
+        assertEquals("doc_smith@gmail.com", obj.getDoctorEmail());
+    }
 }
