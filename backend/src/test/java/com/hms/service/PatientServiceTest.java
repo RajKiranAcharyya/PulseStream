@@ -95,4 +95,11 @@ public class PatientServiceTest {
         verify(patientRepository, times(1)).save(p);
     }
 
+    @Test
+    public void testDeletePatient() {
+        doNothing().when(patientRepository).deleteById(1L);
+        patientService.deletePatient(1L);
+        verify(patientRepository, times(1)).deleteById(1L);
+    }
+
 }
