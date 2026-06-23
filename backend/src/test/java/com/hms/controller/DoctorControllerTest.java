@@ -92,4 +92,14 @@ public class DoctorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetAvailability() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        when(availabilityService.getDoctorAvailability("doc@gmail.com")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/doctor/availability").principal(auth))
+                .andExpect(status().isOk());
+    }
+
 }
