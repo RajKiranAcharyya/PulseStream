@@ -47,4 +47,14 @@ public class PatientServiceTest {
         verify(patientRepository, times(1)).save(patient);
     }
 
+    @Test
+    public void testGetAllPatients() {
+        Patient p1 = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "12345", "pass");
+        Patient p2 = new Patient(2L, false, "Jane", "Doe", "Female", "jane@gmail.com", "67890", "pass");
+        when(patientRepository.findAll()).thenReturn(Arrays.asList(p1, p2));
+
+        List<Patient> result = patientService.getAllPatients();
+        assertEquals(2, result.size());
+    }
+
 }
