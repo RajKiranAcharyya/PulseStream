@@ -63,4 +63,14 @@ public class DoctorServiceTest {
         verify(doctorRepository, times(1)).deleteById("doc@gmail.com");
     }
 
+    @Test
+    public void testGetDoctorByEmail_Found() {
+        Doctor doc = new Doctor("doc@gmail.com", false, "doc1", "pass", "A", 100);
+        when(doctorRepository.findById("doc@gmail.com")).thenReturn(Optional.of(doc));
+
+        Optional<Doctor> result = doctorService.getDoctorByEmail("doc@gmail.com");
+        assertTrue(result.isPresent());
+        assertEquals("doc@gmail.com", result.get().getEmail());
+    }
+
 }
