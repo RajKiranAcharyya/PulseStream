@@ -95,4 +95,11 @@ public class DoctorRegistrationDTOTest {
         obj.setEmail("taylor@gmail.com");
         assertEquals("taylor@gmail.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant4() {
+        DoctorRegistrationDTO obj = new DoctorRegistrationDTO();
+        obj.setEmail("brown@gmail.com");
+        assertEquals("brown@gmail.com", obj.getEmail());
+    }
 }
