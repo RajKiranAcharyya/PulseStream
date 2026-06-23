@@ -50,4 +50,15 @@ public class DoctorControllerTest {
     @MockBean
     private PasswordEncoder passwordEncoder;
 
+    @Test
+    public void testGetAppointments() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.empty());
+        when(appointmentService.getDoctorAppointments("doc@gmail.com")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/doctor/appointments").principal(auth))
+                .andExpect(status().isOk());
+    }
+
 }
