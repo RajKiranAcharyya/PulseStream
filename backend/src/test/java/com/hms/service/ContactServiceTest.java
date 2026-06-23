@@ -27,4 +27,16 @@ public class ContactServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testSaveMessage() {
+        ContactMessage msg = new ContactMessage(null, false, "Alice", "alice@gmail.com", "12345", "Hi!");
+        ContactMessage savedMsg = new ContactMessage(1L, false, "Alice", "alice@gmail.com", "12345", "Hi!");
+        when(contactMessageRepository.save(msg)).thenReturn(savedMsg);
+
+        ContactMessage result = contactService.saveMessage(msg);
+        assertNotNull(result.getId());
+        assertEquals(1L, result.getId());
+        assertEquals("Alice", result.getName());
+    }
+
 }
