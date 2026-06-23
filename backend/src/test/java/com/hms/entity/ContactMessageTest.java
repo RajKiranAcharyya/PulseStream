@@ -80,4 +80,11 @@ public class ContactMessageTest {
         obj.setEmail("u_a@gmail.com");
         assertEquals("u_a@gmail.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant2() {
+        ContactMessage obj = new ContactMessage();
+        obj.setEmail("u_b@gmail.com");
+        assertEquals("u_b@gmail.com", obj.getEmail());
+    }
 }
