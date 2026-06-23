@@ -7,4 +7,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomUserDetailsTest {
 
+    @Test
+    public void testConstructorAndGetters() {
+        CustomUserDetails userDetails = new CustomUserDetails("user", "pass", "ROLE_USER");
+        assertEquals("user", userDetails.getUsername());
+        assertEquals("pass", userDetails.getPassword());
+        
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        assertEquals(1, authorities.size());
+        assertEquals("ROLE_USER", authorities.iterator().next().getAuthority());
+    }
+
 }
