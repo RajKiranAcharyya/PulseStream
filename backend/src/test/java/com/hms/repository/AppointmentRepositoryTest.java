@@ -35,4 +35,16 @@ public class AppointmentRepositoryTest {
         assertEquals(5L, result.get(0).getPid());
     }
 
+    @Test
+    public void testFindByDoctor() {
+        AppointmentRepository repo = mock(AppointmentRepository.class);
+        Appointment app = new Appointment();
+        app.setDoctor("Dr. Smith");
+        when(repo.findByDoctor("Dr. Smith")).thenReturn(Arrays.asList(app));
+
+        List<Appointment> result = repo.findByDoctor("Dr. Smith");
+        assertEquals(1, result.size());
+        assertEquals("Dr. Smith", result.get(0).getDoctor());
+    }
+
 }
