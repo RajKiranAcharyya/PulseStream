@@ -136,4 +136,11 @@ public class PatientTest {
         obj.setGender("Other");
         assertEquals("Other", obj.getGender());
     }
+
+    @Test
+    public void testSetGender_Variant4() {
+        Patient obj = new Patient();
+        obj.setGender("Unknown");
+        assertEquals("Unknown", obj.getGender());
+    }
 }
