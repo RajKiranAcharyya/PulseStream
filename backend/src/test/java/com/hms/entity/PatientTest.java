@@ -87,4 +87,11 @@ public class PatientTest {
         obj.setFname("Diana");
         assertEquals("Diana", obj.getFname());
     }
+
+    @Test
+    public void testSetLname_Variant1() {
+        Patient obj = new Patient();
+        obj.setLname("Smith");
+        assertEquals("Smith", obj.getLname());
+    }
 }
