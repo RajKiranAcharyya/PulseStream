@@ -97,4 +97,11 @@ public class DoctorTest {
         obj.setUsername("dr_c");
         assertEquals("dr_c", obj.getUsername());
     }
+
+    @Test
+    public void testSetUsername_Variant4() {
+        Doctor obj = new Doctor();
+        obj.setUsername("dr_d");
+        assertEquals("dr_d", obj.getUsername());
+    }
 }
