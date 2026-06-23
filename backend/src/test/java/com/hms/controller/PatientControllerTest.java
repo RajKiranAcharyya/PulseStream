@@ -66,4 +66,14 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetAppointments_NotFound() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/patient/appointments").principal(auth))
+                .andExpect(status().isNotFound());
+    }
+
 }
