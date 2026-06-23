@@ -53,4 +53,17 @@ public class PatientControllerTest {
     @MockBean
     private PasswordEncoder passwordEncoder;
 
+    @Test
+    public void testGetAppointments_Found() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        Patient patient = new Patient();
+        patient.setPid(1L);
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+        when(appointmentService.getPatientAppointments(1L)).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/patient/appointments").principal(auth))
+                .andExpect(status().isOk());
+    }
+
 }
