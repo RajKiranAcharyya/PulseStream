@@ -39,4 +39,14 @@ public class PrescriptionServiceTest {
         verify(prescriptionRepository, times(1)).save(prescription);
     }
 
+    @Test
+    public void testGetPatientPrescriptions() {
+        Prescription p = new Prescription(10L, false, 1L, "Dr. Smith", 2L, "Jane", "Doe", null, null, "Flu", "Meds");
+        when(prescriptionRepository.findByPid(2L)).thenReturn(Arrays.asList(p));
+
+        List<Prescription> result = prescriptionService.getPatientPrescriptions(2L);
+        assertEquals(1, result.size());
+        assertEquals(2L, result.get(0).getPid());
+    }
+
 }
