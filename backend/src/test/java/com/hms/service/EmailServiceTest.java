@@ -23,4 +23,12 @@ public class EmailServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testSendEmail_MailSenderNull() {
+        // Set mailSender to null via reflection or manual instantiation
+        EmailService serviceNoMail = new EmailService();
+        serviceNoMail.sendEmail("to@gmail.com", "Subject", "Body");
+        // Should print to console, no exceptions thrown
+    }
+
 }
