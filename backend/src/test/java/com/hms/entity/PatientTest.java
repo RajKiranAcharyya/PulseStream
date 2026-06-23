@@ -59,4 +59,11 @@ public class PatientTest {
         assertEquals(p1.hashCode(), p2.hashCode());
         assertNotNull(p1.toString());
     }
+
+    @Test
+    public void testSetFname_Variant1() {
+        Patient obj = new Patient();
+        obj.setFname("Alice");
+        assertEquals("Alice", obj.getFname());
+    }
 }
