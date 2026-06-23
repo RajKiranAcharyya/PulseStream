@@ -102,4 +102,11 @@ public class AdminTest {
         obj.setEmail("billing@hms.com");
         assertEquals("billing@hms.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant3() {
+        Admin obj = new Admin();
+        obj.setEmail("hr@hms.com");
+        assertEquals("hr@hms.com", obj.getEmail());
+    }
 }
