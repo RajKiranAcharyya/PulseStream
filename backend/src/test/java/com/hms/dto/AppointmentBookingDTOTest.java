@@ -161,4 +161,11 @@ public class AppointmentBookingDTOTest {
         obj.setDocFees(600);
         assertEquals(600, obj.getDocFees());
     }
+
+    @Test
+    public void testSetDocfees_Variant4() {
+        AppointmentBookingDTO obj = new AppointmentBookingDTO();
+        obj.setDocFees(750);
+        assertEquals(750, obj.getDocFees());
+    }
 }
