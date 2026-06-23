@@ -73,4 +73,12 @@ public class DoctorServiceTest {
         assertEquals("doc@gmail.com", result.get().getEmail());
     }
 
+    @Test
+    public void testGetDoctorByEmail_NotFound() {
+        when(doctorRepository.findById("nonexistent@gmail.com")).thenReturn(Optional.empty());
+
+        Optional<Doctor> result = doctorService.getDoctorByEmail("nonexistent@gmail.com");
+        assertTrue(result.isEmpty());
+    }
+
 }
