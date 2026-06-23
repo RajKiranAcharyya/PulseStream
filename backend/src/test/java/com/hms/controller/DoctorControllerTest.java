@@ -148,4 +148,19 @@ public class DoctorControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void testUpdateProfile_Success() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "pass", "Cardio", 500);
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.of(doctor));
+        when(doctorService.saveDoctor(any(Doctor.class))).thenReturn(doctor);
+
+        mockMvc.perform(put("/api/doctor/profile")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"new_name\",\"spec\":\"Pediatrics\",\"docFees\":600}"))
+                .andExpect(status().isOk());
+    }
+
 }
