@@ -138,4 +138,14 @@ public class DoctorControllerTest {
                 .andExpect(jsonPath("$.email").value("doc@gmail.com"));
     }
 
+    @Test
+    public void testGetProfile_NotFound() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/doctor/profile").principal(auth))
+                .andExpect(status().isNotFound());
+    }
+
 }
