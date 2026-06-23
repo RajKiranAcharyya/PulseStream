@@ -147,4 +147,11 @@ public class PrescriptionTest {
         obj.setDisease("Fever");
         assertEquals("Fever", obj.getDisease());
     }
+
+    @Test
+    public void testSetDisease_Variant2() {
+        Prescription obj = new Prescription();
+        obj.setDisease("Cough");
+        assertEquals("Cough", obj.getDisease());
+    }
 }
