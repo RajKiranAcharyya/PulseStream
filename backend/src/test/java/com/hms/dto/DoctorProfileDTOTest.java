@@ -12,4 +12,14 @@ public class DoctorProfileDTOTest {
         assertNull(dto.getSpec());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        DoctorProfileDTO dto = new DoctorProfileDTO("dr_smith", "Cardiology", 500, "pass123");
+
+        assertEquals("dr_smith", dto.getUsername());
+        assertEquals("Cardiology", dto.getSpec());
+        assertEquals(500, dto.getDocFees());
+        assertEquals("pass123", dto.getPassword());
+    }
+
 }
