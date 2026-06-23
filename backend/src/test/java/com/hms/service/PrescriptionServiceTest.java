@@ -49,4 +49,14 @@ public class PrescriptionServiceTest {
         assertEquals(2L, result.get(0).getPid());
     }
 
+    @Test
+    public void testGetDoctorPrescriptions() {
+        Prescription p = new Prescription(10L, false, 1L, "Dr. Smith", 2L, "Jane", "Doe", null, null, "Flu", "Meds");
+        when(prescriptionRepository.findByDoctor("Dr. Smith")).thenReturn(Arrays.asList(p));
+
+        List<Prescription> result = prescriptionService.getDoctorPrescriptions("Dr. Smith");
+        assertEquals(1, result.size());
+        assertEquals("Dr. Smith", result.get(0).getDoctor());
+    }
+
 }
