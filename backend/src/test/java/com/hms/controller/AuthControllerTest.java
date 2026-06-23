@@ -78,4 +78,13 @@ public class AuthControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testValidateToken_Failure() throws Exception {
+        when(authService.validateToken("token-123")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/auth/validate-token")
+                .param("token", "token-123"))
+                .andExpect(status().isBadRequest());
+    }
+
 }
