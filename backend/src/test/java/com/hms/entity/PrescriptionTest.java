@@ -119,4 +119,11 @@ public class PrescriptionTest {
         obj.setLname("Doe");
         assertEquals("Doe", obj.getLname());
     }
+
+    @Test
+    public void testSetLname_Variant2() {
+        Prescription obj = new Prescription();
+        obj.setLname("Smith");
+        assertEquals("Smith", obj.getLname());
+    }
 }
