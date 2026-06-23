@@ -145,4 +145,13 @@ public class AdminControllerTest {
                 .andExpect(content().json("[]"));
     }
 
+    @Test
+    public void testGetMessages() throws Exception {
+        when(contactService.getAllMessages()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/messages"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
 }
