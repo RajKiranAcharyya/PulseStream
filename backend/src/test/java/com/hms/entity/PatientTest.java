@@ -164,4 +164,11 @@ public class PatientTest {
         obj.setEmail("charlie@gmail.com");
         assertEquals("charlie@gmail.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant4() {
+        Patient obj = new Patient();
+        obj.setEmail("diana@gmail.com");
+        assertEquals("diana@gmail.com", obj.getEmail());
+    }
 }
