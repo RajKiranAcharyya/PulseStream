@@ -12,4 +12,13 @@ public class PrescriptionDTOTest {
         assertNull(dto.getDisease());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        PrescriptionDTO dto = new PrescriptionDTO(10L, "Fever", "Aspirin");
+
+        assertEquals(10L, dto.getAppointmentId());
+        assertEquals("Fever", dto.getDisease());
+        assertEquals("Aspirin", dto.getPrescription());
+    }
+
 }
