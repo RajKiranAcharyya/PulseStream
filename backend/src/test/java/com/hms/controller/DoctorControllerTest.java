@@ -70,4 +70,26 @@ public class DoctorControllerTest {
                 .andExpect(content().string("Cancelled"));
     }
 
+    @Test
+    public void testPrescribe() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.empty());
+
+        Prescription prescription = new Prescription();
+        prescription.setAppointmentId(1L);
+        prescription.setPrescription("Aspirin");
+        prescription.setDisease("Fever");
+        prescription.setDoctor("doc@gmail.com");
+
+        when(prescriptionService.savePrescription(any(Prescription.class))).thenReturn(prescription);
+        when(appointmentService.getAppointmentById(1L)).thenReturn(Optional.of(new Appointment()));
+
+        mockMvc.perform(post("/api/doctor/prescribe")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"appointmentId\":1,\"prescription\":\"Aspirin\",\"disease\":\"Fever\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
