@@ -126,4 +126,16 @@ public class DoctorControllerTest {
                 .andExpect(content().string("Removed"));
     }
 
+    @Test
+    public void testGetProfile_Found() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "pass", "Cardio", 500);
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.of(doctor));
+
+        mockMvc.perform(get("/api/doctor/profile").principal(auth))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("doc@gmail.com"));
+    }
+
 }
