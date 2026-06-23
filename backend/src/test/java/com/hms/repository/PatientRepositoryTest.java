@@ -8,4 +8,16 @@ import static org.mockito.Mockito.*;
 
 public class PatientRepositoryTest {
 
+    @Test
+    public void testFindByEmail() {
+        PatientRepository repo = mock(PatientRepository.class);
+        Patient patient = new Patient();
+        patient.setEmail("patient@gmail.com");
+        when(repo.findByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        Optional<Patient> result = repo.findByEmail("patient@gmail.com");
+        assertTrue(result.isPresent());
+        assertEquals("patient@gmail.com", result.get().getEmail());
+    }
+
 }
