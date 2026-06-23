@@ -136,4 +136,11 @@ public class DoctorProfileDTOTest {
         obj.setPassword("pwd1");
         assertEquals("pwd1", obj.getPassword());
     }
+
+    @Test
+    public void testSetPassword_Variant2() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setPassword("pwd2");
+        assertEquals("pwd2", obj.getPassword());
+    }
 }
