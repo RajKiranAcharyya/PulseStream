@@ -132,4 +132,11 @@ public class DoctorTest {
         obj.setPassword("secret4");
         assertEquals("secret4", obj.getPassword());
     }
+
+    @Test
+    public void testSetSpec_Variant1() {
+        Doctor obj = new Doctor();
+        obj.setSpec("Pediatrics");
+        assertEquals("Pediatrics", obj.getSpec());
+    }
 }
