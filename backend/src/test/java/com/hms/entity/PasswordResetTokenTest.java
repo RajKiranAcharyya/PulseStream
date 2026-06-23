@@ -80,4 +80,11 @@ public class PasswordResetTokenTest {
         obj.setEmail("e_1@hms.com");
         assertEquals("e_1@hms.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant2() {
+        PasswordResetToken obj = new PasswordResetToken();
+        obj.setEmail("e_2@hms.com");
+        assertEquals("e_2@hms.com", obj.getEmail());
+    }
 }
