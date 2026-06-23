@@ -175,4 +175,11 @@ public class PrescriptionTest {
         obj.setPrescription("Aspirin");
         assertEquals("Aspirin", obj.getPrescription());
     }
+
+    @Test
+    public void testSetPrescription_Variant2() {
+        Prescription obj = new Prescription();
+        obj.setPrescription("Ibuprofen");
+        assertEquals("Ibuprofen", obj.getPrescription());
+    }
 }
