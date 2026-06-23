@@ -58,4 +58,16 @@ public class PublicControllerTest {
                 .andExpect(content().string("Email already registered"));
     }
 
+    @Test
+    public void testContact() throws Exception {
+        ContactMessageDTO dto = new ContactMessageDTO("Alice", "alice@gmail.com", "123", "Message");
+        ContactMessage msg = new ContactMessage();
+        when(contactService.saveMessage(any(ContactMessage.class))).thenReturn(msg);
+
+        mockMvc.perform(post("/api/public/contact")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"Alice\",\"email\":\"alice@gmail.com\",\"contact\":\"123\",\"message\":\"Message\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
