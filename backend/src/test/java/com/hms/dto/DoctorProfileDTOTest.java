@@ -73,4 +73,11 @@ public class DoctorProfileDTOTest {
         obj.setUsername("dr_brown");
         assertEquals("dr_brown", obj.getUsername());
     }
+
+    @Test
+    public void testSetSpec_Variant1() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setSpec("Cardiology");
+        assertEquals("Cardiology", obj.getSpec());
+    }
 }
