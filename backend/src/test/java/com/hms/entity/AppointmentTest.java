@@ -265,4 +265,11 @@ public class AppointmentTest {
         obj.setDisease("Allergy");
         assertEquals("Allergy", obj.getDisease());
     }
+
+    @Test
+    public void testSetDisease_Variant2() {
+        Appointment obj = new Appointment();
+        obj.setDisease("Asthma");
+        assertEquals("Asthma", obj.getDisease());
+    }
 }
