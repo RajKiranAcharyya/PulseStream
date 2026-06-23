@@ -23,4 +23,16 @@ public class AppointmentRepositoryTest {
         assertTrue(result.contains(LocalTime.of(10, 0)));
     }
 
+    @Test
+    public void testFindByPid() {
+        AppointmentRepository repo = mock(AppointmentRepository.class);
+        Appointment app = new Appointment();
+        app.setPid(5L);
+        when(repo.findByPid(5L)).thenReturn(Arrays.asList(app));
+
+        List<Appointment> result = repo.findByPid(5L);
+        assertEquals(1, result.size());
+        assertEquals(5L, result.get(0).getPid());
+    }
+
 }
