@@ -46,4 +46,11 @@ public class DoctorRegistrationDTOTest {
         assertNotNull(dto.toString());
     }
 
+
+    @Test
+    public void testSetUsername_Variant1() {
+        DoctorRegistrationDTO obj = new DoctorRegistrationDTO();
+        obj.setUsername("dr_smith");
+        assertEquals("dr_smith", obj.getUsername());
+    }
 }
