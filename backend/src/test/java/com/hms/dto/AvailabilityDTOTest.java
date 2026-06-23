@@ -43,4 +43,10 @@ public class AvailabilityDTOTest {
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
+    @Test
+    public void testToString() {
+        AvailabilityDTO dto = new AvailabilityDTO();
+        assertNotNull(dto.toString());
+    }
+
 }
