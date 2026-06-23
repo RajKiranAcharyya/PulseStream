@@ -111,4 +111,11 @@ public class AppointmentTest {
         obj.setLname("Wilson");
         assertEquals("Wilson", obj.getLname());
     }
+
+    @Test
+    public void testSetLname_Variant4() {
+        Appointment obj = new Appointment();
+        obj.setLname("Thomas");
+        assertEquals("Thomas", obj.getLname());
+    }
 }
