@@ -19,4 +19,13 @@ public class PasswordResetTokenRepositoryTest {
         assertEquals("user@gmail.com", result.get().getEmail());
     }
 
+    @Test
+    public void testDeleteByEmail() {
+        PasswordResetTokenRepository repo = mock(PasswordResetTokenRepository.class);
+        doNothing().when(repo).deleteByEmail("user@gmail.com");
+
+        repo.deleteByEmail("user@gmail.com");
+        verify(repo, times(1)).deleteByEmail("user@gmail.com");
+    }
+
 }
