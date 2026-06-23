@@ -100,4 +100,22 @@ public class AuthServiceTest {
         assertFalse(result);
     }
 
+    @Test
+    public void testResetPassword_Success() {
+        PasswordResetToken token = new PasswordResetToken("token-123", "patient@gmail.com", 15);
+        when(tokenRepository.findByToken("token-123")).thenReturn(Optional.of(token));
+        when(passwordEncoder.encode("newPass")).thenReturn("encodedNewPass");
+
+        Patient patient = new Patient();
+        patient.setEmail("patient@gmail.com");
+        patient.setPassword("oldPass");
+        when(patientRepository.findByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        boolean result = authService.resetPassword("token-123", "newPass");
+        assertTrue(result);
+        assertEquals("encodedNewPass", patient.getPassword());
+        verify(patientRepository, times(1)).save(patient);
+        verify(tokenRepository, times(1)).deleteByEmail("patient@gmail.com");
+    }
+
 }
