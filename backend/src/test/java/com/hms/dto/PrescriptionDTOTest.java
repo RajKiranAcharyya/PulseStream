@@ -29,4 +29,13 @@ public class PrescriptionDTOTest {
         assertEquals("Flu", dto.getDisease());
     }
 
+    @Test
+    public void testEqualsAndHashCode() {
+        PrescriptionDTO dto1 = new PrescriptionDTO(10L, "Fever", "Aspirin");
+        PrescriptionDTO dto2 = new PrescriptionDTO(10L, "Fever", "Aspirin");
+
+        assertEquals(dto1, dto2);
+        assertEquals(dto1.hashCode(), dto2.hashCode());
+    }
+
 }
