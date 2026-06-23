@@ -32,4 +32,19 @@ public class PublicControllerTest {
     @MockBean
     private ContactService contactService;
 
+    @Test
+    public void testRegister_Success() throws Exception {
+        PatientRegistrationDTO dto = new PatientRegistrationDTO("John", "Doe", "Male", "john@gmail.com", "123", "pass");
+        when(patientService.getPatientByEmail("john@gmail.com")).thenReturn(Optional.empty());
+
+        Patient patient = new Patient();
+        patient.setEmail("john@gmail.com");
+        when(patientService.registerPatient(any(Patient.class))).thenReturn(patient);
+
+        mockMvc.perform(post("/api/public/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"fname\":\"John\",\"lname\":\"Doe\",\"gender\":\"Male\",\"email\":\"john@gmail.com\",\"contact\":\"123\",\"password\":\"pass\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
