@@ -77,4 +77,11 @@ public class AppointmentBookingDTOTest {
         obj.setDoctor("Dr. Taylor");
         assertEquals("Dr. Taylor", obj.getDoctor());
     }
+
+    @Test
+    public void testSetDoctor_Variant4() {
+        AppointmentBookingDTO obj = new AppointmentBookingDTO();
+        obj.setDoctor("Dr. Brown");
+        assertEquals("Dr. Brown", obj.getDoctor());
+    }
 }
