@@ -146,4 +146,11 @@ public class AppointmentTest {
         obj.setGender("Unknown");
         assertEquals("Unknown", obj.getGender());
     }
+
+    @Test
+    public void testSetEmail_Variant1() {
+        Appointment obj = new Appointment();
+        obj.setEmail("p_david@gmail.com");
+        assertEquals("p_david@gmail.com", obj.getEmail());
+    }
 }
