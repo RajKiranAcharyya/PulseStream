@@ -27,4 +27,16 @@ public class PrescriptionServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testSavePrescription() {
+        Prescription prescription = new Prescription(null, false, 1L, "Dr. Smith", 2L, "Jane", "Doe", null, null, "Flu", "Meds");
+        Prescription savedPrescription = new Prescription(10L, false, 1L, "Dr. Smith", 2L, "Jane", "Doe", null, null, "Flu", "Meds");
+        when(prescriptionRepository.save(prescription)).thenReturn(savedPrescription);
+
+        Prescription result = prescriptionService.savePrescription(prescription);
+        assertNotNull(result);
+        assertEquals(10L, result.getId());
+        verify(prescriptionRepository, times(1)).save(prescription);
+    }
+
 }
