@@ -58,4 +58,15 @@ public class AuthControllerTest {
                 .andExpect(content().string("Password updated successfully."));
     }
 
+    @Test
+    public void testResetPassword_Failure() throws Exception {
+        when(authService.resetPassword("token-123", "newPass")).thenReturn(false);
+
+        mockMvc.perform(post("/api/auth/reset-password")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"token\":\"token-123\",\"password\":\"newPass\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid or expired token."));
+    }
+
 }
