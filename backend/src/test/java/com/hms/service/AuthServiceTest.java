@@ -48,4 +48,15 @@ public class AuthServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testCreateResetToken_EmailNotFound() {
+        String email = "notfound@hms.com";
+        when(adminRepository.existsByEmail(email)).thenReturn(false);
+        when(doctorRepository.existsByEmail(email)).thenReturn(false);
+        when(patientRepository.existsByEmail(email)).thenReturn(false);
+
+        String result = authService.createResetToken(email);
+        assertEquals("Email not found", result);
+    }
+
 }
