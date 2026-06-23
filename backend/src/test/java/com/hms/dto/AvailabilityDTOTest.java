@@ -49,4 +49,11 @@ public class AvailabilityDTOTest {
         assertNotNull(dto.toString());
     }
 
+
+    @Test
+    public void testSetDayofweek_Variant1() {
+        AvailabilityDTO obj = new AvailabilityDTO();
+        obj.setDayOfWeek("Monday");
+        assertEquals("Monday", obj.getDayOfWeek());
+    }
 }
