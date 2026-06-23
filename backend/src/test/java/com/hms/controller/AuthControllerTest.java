@@ -25,4 +25,15 @@ public class AuthControllerTest {
     @MockBean
     private AuthService authService;
 
+    @Test
+    public void testForgotPassword_Success() throws Exception {
+        when(authService.createResetToken("user@hms.com")).thenReturn("Success");
+
+        mockMvc.perform(post("/api/auth/forgot-password")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"user@hms.com\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Reset link sent to your email."));
+    }
+
 }
