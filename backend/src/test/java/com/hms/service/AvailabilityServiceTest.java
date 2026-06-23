@@ -28,4 +28,14 @@ public class AvailabilityServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testGetDoctorAvailability() {
+        Availability av1 = new Availability(1L, "doc@gmail.com", "Monday", LocalTime.of(9, 0), LocalTime.of(12, 0), false);
+        when(availabilityRepository.findByDoctorEmail("doc@gmail.com")).thenReturn(Arrays.asList(av1));
+
+        List<Availability> result = availabilityService.getDoctorAvailability("doc@gmail.com");
+        assertEquals(1, result.size());
+        assertEquals("doc@gmail.com", result.get(0).getDoctorEmail());
+    }
+
 }
