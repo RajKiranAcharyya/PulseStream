@@ -59,4 +59,11 @@ public class ContactMessageDTOTest {
         obj.setName("User_B");
         assertEquals("User_B", obj.getName());
     }
+
+    @Test
+    public void testSetName_Variant3() {
+        ContactMessageDTO obj = new ContactMessageDTO();
+        obj.setName("User_C");
+        assertEquals("User_C", obj.getName());
+    }
 }
