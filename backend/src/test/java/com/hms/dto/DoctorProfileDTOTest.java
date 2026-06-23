@@ -45,4 +45,11 @@ public class DoctorProfileDTOTest {
         assertNotNull(dto.toString());
     }
 
+
+    @Test
+    public void testSetUsername_Variant1() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setUsername("dr_smith");
+        assertEquals("dr_smith", obj.getUsername());
+    }
 }
