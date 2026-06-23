@@ -118,4 +118,13 @@ public class AdminControllerTest {
                 .andExpect(content().string("Doctor removed"));
     }
 
+    @Test
+    public void testGetAppointments() throws Exception {
+        when(appointmentService.getAllAppointments()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/appointments"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
 }
