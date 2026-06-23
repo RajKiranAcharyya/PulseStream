@@ -21,4 +21,16 @@ public class PrescriptionRepositoryTest {
         assertEquals(1L, result.get(0).getPid());
     }
 
+    @Test
+    public void testFindByDoctor() {
+        PrescriptionRepository repo = mock(PrescriptionRepository.class);
+        Prescription p = new Prescription();
+        p.setDoctor("Dr. Smith");
+        when(repo.findByDoctor("Dr. Smith")).thenReturn(Arrays.asList(p));
+
+        List<Prescription> result = repo.findByDoctor("Dr. Smith");
+        assertEquals(1, result.size());
+        assertEquals("Dr. Smith", result.get(0).getDoctor());
+    }
+
 }
