@@ -66,4 +66,11 @@ public class ContactMessageTest {
         obj.setName("User_C");
         assertEquals("User_C", obj.getName());
     }
+
+    @Test
+    public void testSetName_Variant4() {
+        ContactMessage obj = new ContactMessage();
+        obj.setName("User_D");
+        assertEquals("User_D", obj.getName());
+    }
 }
