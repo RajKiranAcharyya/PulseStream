@@ -47,4 +47,15 @@ public class PublicControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testRegister_EmailExists() throws Exception {
+        when(patientService.getPatientByEmail("john@gmail.com")).thenReturn(Optional.of(new Patient()));
+
+        mockMvc.perform(post("/api/public/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"fname\":\"John\",\"lname\":\"Doe\",\"gender\":\"Male\",\"email\":\"john@gmail.com\",\"contact\":\"123\",\"password\":\"pass\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Email already registered"));
+    }
+
 }
