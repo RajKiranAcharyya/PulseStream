@@ -45,4 +45,11 @@ public class PasswordResetTokenTest {
         assertEquals("new@gmail.com", token.getEmail());
         assertEquals(now, token.getExpiryDate());
     }
+
+    @Test
+    public void testSetToken_Variant1() {
+        PasswordResetToken obj = new PasswordResetToken();
+        obj.setToken("uuid-1");
+        assertEquals("uuid-1", obj.getToken());
+    }
 }
