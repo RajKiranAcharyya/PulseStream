@@ -56,4 +56,11 @@ public class PrescriptionTest {
         assertEquals(p1.hashCode(), p2.hashCode());
         assertNotNull(p1.toString());
     }
+
+    @Test
+    public void testSetDoctor_Variant1() {
+        Prescription obj = new Prescription();
+        obj.setDoctor("Dr. Smith");
+        assertEquals("Dr. Smith", obj.getDoctor());
+    }
 }
