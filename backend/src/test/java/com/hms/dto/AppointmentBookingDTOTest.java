@@ -15,4 +15,18 @@ public class AppointmentBookingDTOTest {
         assertNull(dto.getApptime());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.of(10, 0);
+        AppointmentBookingDTO dto = new AppointmentBookingDTO("Dr. Smith", date, time, "Flu", 30, 500);
+
+        assertEquals("Dr. Smith", dto.getDoctor());
+        assertEquals(date, dto.getAppdate());
+        assertEquals(time, dto.getApptime());
+        assertEquals("Flu", dto.getDisease());
+        assertEquals(30, dto.getAge());
+        assertEquals(500, dto.getDocFees());
+    }
+
 }
