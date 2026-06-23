@@ -181,4 +181,11 @@ public class AppointmentTest {
         obj.setContact("98765");
         assertEquals("98765", obj.getContact());
     }
+
+    @Test
+    public void testSetContact_Variant2() {
+        Appointment obj = new Appointment();
+        obj.setContact("87654");
+        assertEquals("87654", obj.getContact());
+    }
 }
