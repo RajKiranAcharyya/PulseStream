@@ -93,4 +93,11 @@ public class AuthServiceTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    public void testResetPassword_InvalidToken() {
+        when(tokenRepository.findByToken("invalid-token")).thenReturn(Optional.empty());
+        boolean result = authService.resetPassword("invalid-token", "newPass");
+        assertFalse(result);
+    }
+
 }
