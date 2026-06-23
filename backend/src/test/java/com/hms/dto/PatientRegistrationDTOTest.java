@@ -32,4 +32,13 @@ public class PatientRegistrationDTOTest {
         assertEquals("Jane", dto.getFname());
     }
 
+    @Test
+    public void testEqualsAndHashCode() {
+        PatientRegistrationDTO dto1 = new PatientRegistrationDTO("John", "Doe", "Male", "john@gmail.com", "1234567890", "pass123");
+        PatientRegistrationDTO dto2 = new PatientRegistrationDTO("John", "Doe", "Male", "john@gmail.com", "1234567890", "pass123");
+
+        assertEquals(dto1, dto2);
+        assertEquals(dto1.hashCode(), dto2.hashCode());
+    }
+
 }
