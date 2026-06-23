@@ -45,4 +45,11 @@ public class ContactMessageTest {
         assertEquals(m1.hashCode(), m2.hashCode());
         assertNotNull(m1.toString());
     }
+
+    @Test
+    public void testSetName_Variant1() {
+        ContactMessage obj = new ContactMessage();
+        obj.setName("User_A");
+        assertEquals("User_A", obj.getName());
+    }
 }
