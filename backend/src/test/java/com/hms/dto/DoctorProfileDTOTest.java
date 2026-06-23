@@ -87,4 +87,11 @@ public class DoctorProfileDTOTest {
         obj.setSpec("Neurology");
         assertEquals("Neurology", obj.getSpec());
     }
+
+    @Test
+    public void testSetSpec_Variant3() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setSpec("Pediatrics");
+        assertEquals("Pediatrics", obj.getSpec());
+    }
 }
