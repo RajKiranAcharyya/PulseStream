@@ -111,4 +111,17 @@ public class CustomUserDetailsServiceTest {
         assertEquals("patient@gmail.com", userDetails.getUsername());
     }
 
+    @Test
+    public void testLoadUserByUsername_AllTablesNotFound() {
+        when(request.getParameter("loginRole")).thenReturn(null);
+        when(adminRepository.findById("user")).thenReturn(Optional.empty());
+        when(doctorRepository.findById("user")).thenReturn(Optional.empty());
+        when(doctorRepository.findByUsername("user")).thenReturn(Optional.empty());
+        when(patientRepository.findByEmail("user")).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> {
+            customUserDetailsService.loadUserByUsername("user");
+        });
+    }
+
 }
