@@ -62,4 +62,11 @@ public class AppointmentTest {
         assertEquals(app1.hashCode(), app2.hashCode());
         assertNotNull(app1.toString());
     }
+
+    @Test
+    public void testSetFname_Variant1() {
+        Appointment obj = new Appointment();
+        obj.setFname("David");
+        assertEquals("David", obj.getFname());
+    }
 }
