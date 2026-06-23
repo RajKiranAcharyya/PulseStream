@@ -1,0 +1,38 @@
+package com.hms.entity;
+
+import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class PrescriptionTest {
+
+    @Test
+    public void testNoArgsConstructor() {
+        Prescription prescription = new Prescription();
+        assertNull(prescription.getId());
+        assertFalse(prescription.isDeleted());
+        assertNull(prescription.getDoctor());
+    }
+
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.of(14, 30);
+        Prescription prescription = new Prescription(
+                1L, false, 100L, "Dr. House", 5L, "Jane", "Doe", date, time, "Fever", "Paracetamol 500mg"
+        );
+
+        assertEquals(1L, prescription.getId());
+        assertFalse(prescription.isDeleted());
+        assertEquals(100L, prescription.getAppointmentId());
+        assertEquals("Dr. House", prescription.getDoctor());
+        assertEquals(5L, prescription.getPid());
+        assertEquals("Jane", prescription.getFname());
+        assertEquals("Doe", prescription.getLname());
+        assertEquals(date, prescription.getAppdate());
+        assertEquals(time, prescription.getApptime());
+        assertEquals("Fever", prescription.getDisease());
+        assertEquals("Paracetamol 500mg", prescription.getPrescription());
+    }
+}
