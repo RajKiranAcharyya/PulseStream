@@ -48,4 +48,11 @@ public class DoctorTest {
         assertEquals(d1.hashCode(), d2.hashCode());
         assertNotNull(d1.toString());
     }
+
+    @Test
+    public void testSetEmail_Variant1() {
+        Doctor obj = new Doctor();
+        obj.setEmail("doc_a@hms.com");
+        assertEquals("doc_a@hms.com", obj.getEmail());
+    }
 }
