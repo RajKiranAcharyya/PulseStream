@@ -108,4 +108,11 @@ public class DoctorProfileDTOTest {
         obj.setDocFees(300);
         assertEquals(300, obj.getDocFees());
     }
+
+    @Test
+    public void testSetDocfees_Variant2() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setDocFees(450);
+        assertEquals(450, obj.getDocFees());
+    }
 }
