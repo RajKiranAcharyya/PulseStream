@@ -18,4 +18,10 @@ public class CustomUserDetailsTest {
         assertEquals("ROLE_USER", authorities.iterator().next().getAuthority());
     }
 
+    @Test
+    public void testAccountNonExpired() {
+        CustomUserDetails userDetails = new CustomUserDetails("user", "pass", "ROLE_USER");
+        assertTrue(userDetails.isAccountNonExpired());
+    }
+
 }
