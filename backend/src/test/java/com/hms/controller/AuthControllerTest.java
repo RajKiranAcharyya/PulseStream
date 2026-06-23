@@ -47,4 +47,15 @@ public class AuthControllerTest {
                 .andExpect(content().string("Email not found"));
     }
 
+    @Test
+    public void testResetPassword_Success() throws Exception {
+        when(authService.resetPassword("token-123", "newPass")).thenReturn(true);
+
+        mockMvc.perform(post("/api/auth/reset-password")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"token\":\"token-123\",\"password\":\"newPass\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Password updated successfully."));
+    }
+
 }
