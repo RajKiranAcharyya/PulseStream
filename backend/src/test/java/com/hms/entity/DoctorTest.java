@@ -139,4 +139,11 @@ public class DoctorTest {
         obj.setSpec("Pediatrics");
         assertEquals("Pediatrics", obj.getSpec());
     }
+
+    @Test
+    public void testSetSpec_Variant2() {
+        Doctor obj = new Doctor();
+        obj.setSpec("Cardiology");
+        assertEquals("Cardiology", obj.getSpec());
+    }
 }
