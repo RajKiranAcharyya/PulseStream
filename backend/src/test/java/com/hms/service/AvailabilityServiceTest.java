@@ -38,4 +38,15 @@ public class AvailabilityServiceTest {
         assertEquals("doc@gmail.com", result.get(0).getDoctorEmail());
     }
 
+    @Test
+    public void testAddAvailability() {
+        Availability av = new Availability(null, "doc@gmail.com", "Tuesday", LocalTime.of(14, 0), LocalTime.of(16, 0), false);
+        Availability savedAv = new Availability(1L, "doc@gmail.com", "Tuesday", LocalTime.of(14, 0), LocalTime.of(16, 0), false);
+        when(availabilityRepository.save(av)).thenReturn(savedAv);
+
+        Availability result = availabilityService.addAvailability(av);
+        assertNotNull(result.getId());
+        assertEquals(1L, result.getId());
+    }
+
 }
