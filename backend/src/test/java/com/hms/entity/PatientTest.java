@@ -49,4 +49,14 @@ public class PatientTest {
         assertEquals("0987654321", patient.getContact());
         assertEquals("newpass", patient.getPassword());
     }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        Patient p1 = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "1234567890", "password123");
+        Patient p2 = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "1234567890", "password123");
+
+        assertEquals(p1, p2);
+        assertEquals(p1.hashCode(), p2.hashCode());
+        assertNotNull(p1.toString());
+    }
 }
