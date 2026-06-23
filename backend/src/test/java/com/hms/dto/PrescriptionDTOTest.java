@@ -38,4 +38,10 @@ public class PrescriptionDTOTest {
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
+    @Test
+    public void testToString() {
+        PrescriptionDTO dto = new PrescriptionDTO();
+        assertNotNull(dto.toString());
+    }
+
 }
