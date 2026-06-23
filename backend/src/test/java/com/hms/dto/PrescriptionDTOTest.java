@@ -21,4 +21,12 @@ public class PrescriptionDTOTest {
         assertEquals("Aspirin", dto.getPrescription());
     }
 
+    @Test
+    public void testSetters() {
+        PrescriptionDTO dto = new PrescriptionDTO();
+        dto.setDisease("Flu");
+
+        assertEquals("Flu", dto.getDisease());
+    }
+
 }
