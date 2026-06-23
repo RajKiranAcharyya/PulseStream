@@ -90,4 +90,11 @@ public class AvailabilityTest {
         obj.setDayOfWeek("Wednesday");
         assertEquals("Wednesday", obj.getDayOfWeek());
     }
+
+    @Test
+    public void testSetDayofweek_Variant3() {
+        Availability obj = new Availability();
+        obj.setDayOfWeek("Friday");
+        assertEquals("Friday", obj.getDayOfWeek());
+    }
 }
