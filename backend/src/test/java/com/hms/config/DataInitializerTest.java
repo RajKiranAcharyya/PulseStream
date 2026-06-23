@@ -40,4 +40,16 @@ public class DataInitializerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testRun_NoAdminExists() throws Exception {
+        when(adminRepository.count()).thenReturn(0L);
+        when(passwordEncoder.encode("admin123")).thenReturn("encodedAdmin123");
+        when(doctorRepository.findAll()).thenReturn(Collections.emptyList());
+        when(patientRepository.findAll()).thenReturn(Collections.emptyList());
+
+        dataInitializer.run();
+
+        verify(adminRepository, times(1)).save(any(Admin.class));
+    }
+
 }
