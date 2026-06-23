@@ -97,4 +97,18 @@ public class CustomUserDetailsServiceTest {
         assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_PATIENT")));
     }
 
+    @Test
+    public void testLoadUserByUsername_AllTablesSuccess() {
+        when(request.getParameter("loginRole")).thenReturn(null);
+        Patient patient = new Patient(1L, false, "John", "Doe", "Male", "patient@gmail.com", "123", "pass");
+        when(adminRepository.findById("patient@gmail.com")).thenReturn(Optional.empty());
+        when(doctorRepository.findById("patient@gmail.com")).thenReturn(Optional.empty());
+        when(doctorRepository.findByUsername("patient@gmail.com")).thenReturn(Optional.empty());
+        when(patientRepository.findByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername("patient@gmail.com");
+        assertNotNull(userDetails);
+        assertEquals("patient@gmail.com", userDetails.getUsername());
+    }
+
 }
