@@ -32,4 +32,18 @@ public class DoctorServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testAddDoctor() {
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "rawPass", "Cardiology", 500);
+        when(passwordEncoder.encode("rawPass")).thenReturn("encodedPass");
+        
+        Doctor savedDoctor = new Doctor("doc@gmail.com", false, "dr_smith", "encodedPass", "Cardiology", 500);
+        when(doctorRepository.save(any(Doctor.class))).thenReturn(savedDoctor);
+
+        Doctor result = doctorService.addDoctor(doctor);
+        assertNotNull(result);
+        assertEquals("encodedPass", result.getPassword());
+        verify(doctorRepository, times(1)).save(doctor);
+    }
+
 }
