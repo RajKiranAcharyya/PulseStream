@@ -153,4 +153,11 @@ public class DoctorTest {
         obj.setSpec("Neurology");
         assertEquals("Neurology", obj.getSpec());
     }
+
+    @Test
+    public void testSetSpec_Variant4() {
+        Doctor obj = new Doctor();
+        obj.setSpec("Orthopedics");
+        assertEquals("Orthopedics", obj.getSpec());
+    }
 }
