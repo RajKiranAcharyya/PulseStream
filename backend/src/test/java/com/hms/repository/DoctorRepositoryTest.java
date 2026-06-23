@@ -20,4 +20,12 @@ public class DoctorRepositoryTest {
         assertEquals("dr_smith", result.get().getUsername());
     }
 
+    @Test
+    public void testExistsByEmail() {
+        DoctorRepository repo = mock(DoctorRepository.class);
+        when(repo.existsByEmail("smith@gmail.com")).thenReturn(true);
+
+        assertTrue(repo.existsByEmail("smith@gmail.com"));
+    }
+
 }
