@@ -29,4 +29,14 @@ public class AppointmentBookingDTOTest {
         assertEquals(500, dto.getDocFees());
     }
 
+    @Test
+    public void testSetters() {
+        AppointmentBookingDTO dto = new AppointmentBookingDTO();
+        dto.setDoctor("Dr. Smith");
+        dto.setAge(25);
+
+        assertEquals("Dr. Smith", dto.getDoctor());
+        assertEquals(25, dto.getAge());
+    }
+
 }
