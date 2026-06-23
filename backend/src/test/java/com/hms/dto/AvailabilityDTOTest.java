@@ -24,4 +24,12 @@ public class AvailabilityDTOTest {
         assertEquals(end, dto.getEndTime());
     }
 
+    @Test
+    public void testSetters() {
+        AvailabilityDTO dto = new AvailabilityDTO();
+        dto.setDayOfWeek("Tuesday");
+
+        assertEquals("Tuesday", dto.getDayOfWeek());
+    }
+
 }
