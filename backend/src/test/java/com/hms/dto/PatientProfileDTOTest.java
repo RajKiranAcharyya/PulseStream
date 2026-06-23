@@ -22,4 +22,12 @@ public class PatientProfileDTOTest {
         assertEquals("pass123", dto.getPassword());
     }
 
+    @Test
+    public void testSetters() {
+        PatientProfileDTO dto = new PatientProfileDTO();
+        dto.setFname("Jane");
+
+        assertEquals("Jane", dto.getFname());
+    }
+
 }
