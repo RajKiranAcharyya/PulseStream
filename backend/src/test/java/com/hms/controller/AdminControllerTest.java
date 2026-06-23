@@ -86,4 +86,15 @@ public class AdminControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testAddDoctor_DuplicateEmail() throws Exception {
+        when(doctorService.getDoctorByEmail("smith@gmail.com")).thenReturn(Optional.of(new Doctor()));
+
+        mockMvc.perform(post("/api/admin/add-doctor")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"dr_smith\",\"email\":\"smith@gmail.com\",\"spec\":\"Cardiology\",\"docFees\":500,\"password\":\"pass123\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Doctor with this email already exists"));
+    }
+
 }
