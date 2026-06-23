@@ -162,4 +162,19 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testUpdateProfile_Success() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        Patient patient = new Patient(1L, false, "John", "Doe", "Male", "patient@gmail.com", "123", "pass");
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+        when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
+
+        mockMvc.perform(put("/api/patient/profile")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"fname\":\"NewName\",\"lname\":\"NewLname\",\"contact\":\"999\",\"password\":\"newPass\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
