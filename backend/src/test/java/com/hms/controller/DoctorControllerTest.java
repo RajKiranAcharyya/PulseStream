@@ -61,4 +61,13 @@ public class DoctorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testCancelAppointment() throws Exception {
+        doNothing().when(appointmentService).cancelByDoctor(1L);
+
+        mockMvc.perform(post("/api/doctor/cancel/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Cancelled"));
+    }
+
 }
