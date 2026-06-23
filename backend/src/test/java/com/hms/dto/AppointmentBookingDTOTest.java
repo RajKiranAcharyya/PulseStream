@@ -50,4 +50,10 @@ public class AppointmentBookingDTOTest {
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
+    @Test
+    public void testToString() {
+        AppointmentBookingDTO dto = new AppointmentBookingDTO();
+        assertNotNull(dto.toString());
+    }
+
 }
