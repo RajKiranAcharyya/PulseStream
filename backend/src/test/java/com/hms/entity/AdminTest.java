@@ -46,4 +46,11 @@ public class AdminTest {
         obj.setUsername("sysop");
         assertEquals("sysop", obj.getUsername());
     }
+
+    @Test
+    public void testSetUsername_Variant3() {
+        Admin obj = new Admin();
+        obj.setUsername("manager");
+        assertEquals("manager", obj.getUsername());
+    }
 }
