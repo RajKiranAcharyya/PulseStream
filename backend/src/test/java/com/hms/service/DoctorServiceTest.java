@@ -46,4 +46,14 @@ public class DoctorServiceTest {
         verify(doctorRepository, times(1)).save(doctor);
     }
 
+    @Test
+    public void testGetAllDoctors() {
+        Doctor doc1 = new Doctor("doc1@gmail.com", false, "doc1", "pass", "A", 100);
+        Doctor doc2 = new Doctor("doc2@gmail.com", false, "doc2", "pass", "B", 200);
+        when(doctorRepository.findAll()).thenReturn(Arrays.asList(doc1, doc2));
+
+        List<Doctor> result = doctorService.getAllDoctors();
+        assertEquals(2, result.size());
+    }
+
 }
