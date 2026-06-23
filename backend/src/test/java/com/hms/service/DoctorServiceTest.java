@@ -91,4 +91,14 @@ public class DoctorServiceTest {
         assertEquals("dr_jones", result.get().getUsername());
     }
 
+    @Test
+    public void testSaveDoctor() {
+        Doctor doc = new Doctor("doc@gmail.com", false, "doc1", "pass", "A", 100);
+        when(doctorRepository.save(doc)).thenReturn(doc);
+
+        Doctor result = doctorService.saveDoctor(doc);
+        assertNotNull(result);
+        verify(doctorRepository, times(1)).save(doc);
+    }
+
 }
