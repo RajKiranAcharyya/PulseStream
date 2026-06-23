@@ -45,4 +45,11 @@ public class ContactMessageDTOTest {
         assertNotNull(dto.toString());
     }
 
+
+    @Test
+    public void testSetName_Variant1() {
+        ContactMessageDTO obj = new ContactMessageDTO();
+        obj.setName("User_A");
+        assertEquals("User_A", obj.getName());
+    }
 }
