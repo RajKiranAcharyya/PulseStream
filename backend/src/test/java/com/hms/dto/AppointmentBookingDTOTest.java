@@ -56,4 +56,11 @@ public class AppointmentBookingDTOTest {
         assertNotNull(dto.toString());
     }
 
+
+    @Test
+    public void testSetDoctor_Variant1() {
+        AppointmentBookingDTO obj = new AppointmentBookingDTO();
+        obj.setDoctor("Dr. Smith");
+        assertEquals("Dr. Smith", obj.getDoctor());
+    }
 }
