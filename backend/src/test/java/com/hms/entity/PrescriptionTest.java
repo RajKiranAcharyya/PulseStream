@@ -91,4 +91,11 @@ public class PrescriptionTest {
         obj.setFname("Jane");
         assertEquals("Jane", obj.getFname());
     }
+
+    @Test
+    public void testSetFname_Variant2() {
+        Prescription obj = new Prescription();
+        obj.setFname("John");
+        assertEquals("John", obj.getFname());
+    }
 }
