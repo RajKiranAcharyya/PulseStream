@@ -39,4 +39,13 @@ public class AdminControllerTest {
     @MockBean
     private ContactService contactService;
 
+    @Test
+    public void testGetPatients() throws Exception {
+        when(patientService.getAllPatients()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/patients"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
 }
