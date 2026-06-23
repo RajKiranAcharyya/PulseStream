@@ -76,4 +76,12 @@ public class PatientControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void testGetDoctors() throws Exception {
+        when(doctorService.getAllDoctors()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/patient/doctors"))
+                .andExpect(status().isOk());
+    }
+
 }
