@@ -21,4 +21,11 @@ public class DashboardControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Test
+    public void testDashboard_NoAuthRedirectToIndex() throws Exception {
+        mockMvc.perform(get("/dashboard"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/index.html"));
+    }
+
 }
