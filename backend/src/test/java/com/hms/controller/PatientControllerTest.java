@@ -97,4 +97,25 @@ public class PatientControllerTest {
                 .andExpect(content().string("Cannot book appointments for past dates."));
     }
 
+    @Test
+    public void testBookAppointment_Success() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        LocalDate futureDate = LocalDate.now().plusDays(5);
+        LocalTime time = LocalTime.of(10, 0);
+
+        Patient patient = new Patient();
+        patient.setPid(1L);
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        Appointment app = new Appointment();
+        when(appointmentService.bookAppointment(any(Appointment.class))).thenReturn(app);
+
+        mockMvc.perform(post("/api/patient/book")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"doctor\":\"Dr. Smith\",\"appdate\":\"" + futureDate + "\",\"apptime\":\"" + time + "\",\"disease\":\"Flu\",\"age\":25,\"docFees\":500}"))
+                .andExpect(status().isOk());
+    }
+
 }
