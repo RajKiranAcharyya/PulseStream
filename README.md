@@ -1,5 +1,7 @@
 # 🏥 PulseStream Clinical Platform: High-Performance Healthcare SaaS
 
+[![Java CI with Maven](https://github.com/RajKiranAcharyya/PulseStream/actions/workflows/maven-test.yml/badge.svg)](https://github.com/RajKiranAcharyya/PulseStream/actions/workflows/maven-test.yml)
+
 PulseStream is a clinical management system engineered for institutional-scale healthcare operations. 
 
 # Live link: https://pulsestream-rblw.onrender.com
