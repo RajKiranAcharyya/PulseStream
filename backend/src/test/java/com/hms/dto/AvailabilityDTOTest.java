@@ -70,4 +70,11 @@ public class AvailabilityDTOTest {
         obj.setDayOfWeek("Friday");
         assertEquals("Friday", obj.getDayOfWeek());
     }
+
+    @Test
+    public void testSetDayofweek_Variant4() {
+        AvailabilityDTO obj = new AvailabilityDTO();
+        obj.setDayOfWeek("Sunday");
+        assertEquals("Sunday", obj.getDayOfWeek());
+    }
 }
