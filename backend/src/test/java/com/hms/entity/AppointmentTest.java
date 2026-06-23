@@ -160,4 +160,11 @@ public class AppointmentTest {
         obj.setEmail("p_james@gmail.com");
         assertEquals("p_james@gmail.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetEmail_Variant3() {
+        Appointment obj = new Appointment();
+        obj.setEmail("p_robert@gmail.com");
+        assertEquals("p_robert@gmail.com", obj.getEmail());
+    }
 }
