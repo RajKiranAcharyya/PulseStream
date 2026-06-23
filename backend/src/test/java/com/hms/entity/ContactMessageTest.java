@@ -150,4 +150,11 @@ public class ContactMessageTest {
         obj.setMessage("Inquiry 3");
         assertEquals("Inquiry 3", obj.getMessage());
     }
+
+    @Test
+    public void testSetMessage_Variant4() {
+        ContactMessage obj = new ContactMessage();
+        obj.setMessage("Inquiry 4");
+        assertEquals("Inquiry 4", obj.getMessage());
+    }
 }
