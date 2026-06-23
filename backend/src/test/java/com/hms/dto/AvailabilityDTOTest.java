@@ -32,4 +32,15 @@ public class AvailabilityDTOTest {
         assertEquals("Tuesday", dto.getDayOfWeek());
     }
 
+    @Test
+    public void testEqualsAndHashCode() {
+        LocalTime start = LocalTime.of(9, 0);
+        LocalTime end = LocalTime.of(17, 0);
+        AvailabilityDTO dto1 = new AvailabilityDTO("Monday", start, end);
+        AvailabilityDTO dto2 = new AvailabilityDTO("Monday", start, end);
+
+        assertEquals(dto1, dto2);
+        assertEquals(dto1.hashCode(), dto2.hashCode());
+    }
+
 }
