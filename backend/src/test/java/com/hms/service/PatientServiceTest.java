@@ -75,4 +75,14 @@ public class PatientServiceTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    public void testGetPatientById_Found() {
+        Patient p = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "12345", "pass");
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(p));
+
+        Optional<Patient> result = patientService.getPatientById(1L);
+        assertTrue(result.isPresent());
+        assertEquals(1L, result.get().getPid());
+    }
+
 }
