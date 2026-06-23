@@ -39,4 +39,16 @@ public class ContactServiceTest {
         assertEquals("Alice", result.getName());
     }
 
+    @Test
+    public void testGetAllMessages() {
+        ContactMessage msg1 = new ContactMessage(1L, false, "Alice", "alice@gmail.com", "12345", "Hi!");
+        ContactMessage msg2 = new ContactMessage(2L, false, "Bob", "bob@gmail.com", "67890", "Hello!");
+        when(contactMessageRepository.findAll()).thenReturn(Arrays.asList(msg1, msg2));
+
+        List<ContactMessage> result = contactService.getAllMessages();
+        assertEquals(2, result.size());
+        assertEquals("Alice", result.get(0).getName());
+        assertEquals("Bob", result.get(1).getName());
+    }
+
 }
