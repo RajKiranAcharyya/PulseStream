@@ -42,4 +42,25 @@ public class ReminderSchedulerTest {
         verify(emailService, never()).sendEmail(anyString(), anyString(), anyString());
     }
 
+    @Test
+    public void testSendDailyReminders_WithAppointments() {
+        LocalDate today = LocalDate.now();
+        Appointment app = new Appointment();
+        app.setEmail("patient@gmail.com");
+        app.setFname("John");
+        app.setDoctor("Dr. Smith");
+        app.setApptime(LocalTime.of(10, 0));
+
+        when(appointmentRepository.findByAppdateAndUserStatusAndDoctorStatus(today, 1, 1))
+                .thenReturn(Arrays.asList(app));
+
+        reminderScheduler.sendDailyReminders();
+
+        verify(emailService, times(1)).sendEmail(
+                eq("patient@gmail.com"),
+                eq("Appointment Reminder"),
+                contains("Dr. Smith")
+        );
+    }
+
 }
