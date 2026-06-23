@@ -5,4 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DoctorProfileDTOTest {
 
+    @Test
+    public void testNoArgsConstructor() {
+        DoctorProfileDTO dto = new DoctorProfileDTO();
+        assertNull(dto.getUsername());
+        assertNull(dto.getSpec());
+    }
+
 }
