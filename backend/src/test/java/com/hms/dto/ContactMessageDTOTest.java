@@ -143,4 +143,11 @@ public class ContactMessageDTOTest {
         obj.setMessage("Hi B");
         assertEquals("Hi B", obj.getMessage());
     }
+
+    @Test
+    public void testSetMessage_Variant3() {
+        ContactMessageDTO obj = new ContactMessageDTO();
+        obj.setMessage("Hi C");
+        assertEquals("Hi C", obj.getMessage());
+    }
 }
