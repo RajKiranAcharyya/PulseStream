@@ -151,4 +151,15 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetProfile_Found() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        Patient patient = new Patient(1L, false, "John", "Doe", "Male", "patient@gmail.com", "123", "pass");
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        mockMvc.perform(get("/api/patient/profile").principal(auth))
+                .andExpect(status().isOk());
+    }
+
 }
