@@ -73,4 +73,11 @@ public class ContactMessageTest {
         obj.setName("User_D");
         assertEquals("User_D", obj.getName());
     }
+
+    @Test
+    public void testSetEmail_Variant1() {
+        ContactMessage obj = new ContactMessage();
+        obj.setEmail("u_a@gmail.com");
+        assertEquals("u_a@gmail.com", obj.getEmail());
+    }
 }
