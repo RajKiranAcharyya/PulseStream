@@ -125,4 +125,11 @@ public class AppointmentTest {
         obj.setGender("Male");
         assertEquals("Male", obj.getGender());
     }
+
+    @Test
+    public void testSetGender_Variant2() {
+        Appointment obj = new Appointment();
+        obj.setGender("Female");
+        assertEquals("Female", obj.getGender());
+    }
 }
