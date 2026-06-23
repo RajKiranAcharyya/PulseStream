@@ -51,4 +51,16 @@ public class CustomUserDetailsServiceTest {
         RequestContextHolder.resetRequestAttributes();
     }
 
+    @Test
+    public void testLoadUserByUsername_AdminSuccess() {
+        when(request.getParameter("loginRole")).thenReturn("ADMIN");
+        Admin admin = new Admin("admin1", "pass", "admin1@gmail.com");
+        when(adminRepository.findById("admin1")).thenReturn(Optional.of(admin));
+
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername("admin1");
+        assertNotNull(userDetails);
+        assertEquals("admin1", userDetails.getUsername());
+        assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")));
+    }
+
 }
