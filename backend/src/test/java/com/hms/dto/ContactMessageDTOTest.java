@@ -108,4 +108,11 @@ public class ContactMessageDTOTest {
         obj.setContact("91111");
         assertEquals("91111", obj.getContact());
     }
+
+    @Test
+    public void testSetContact_Variant2() {
+        ContactMessageDTO obj = new ContactMessageDTO();
+        obj.setContact("92222");
+        assertEquals("92222", obj.getContact());
+    }
 }
