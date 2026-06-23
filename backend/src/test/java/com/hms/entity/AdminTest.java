@@ -32,4 +32,11 @@ public class AdminTest {
         assertEquals("newPass", admin.getPassword());
         assertEquals("new@hms.com", admin.getEmail());
     }
+
+    @Test
+    public void testSetUsername_Variant1() {
+        Admin obj = new Admin();
+        obj.setUsername("admin_user");
+        assertEquals("admin_user", obj.getUsername());
+    }
 }
