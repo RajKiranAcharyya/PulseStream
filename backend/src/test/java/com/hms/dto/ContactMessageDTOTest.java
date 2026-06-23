@@ -12,4 +12,14 @@ public class ContactMessageDTOTest {
         assertNull(dto.getEmail());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        ContactMessageDTO dto = new ContactMessageDTO("Alice", "alice@gmail.com", "123", "Hello");
+
+        assertEquals("Alice", dto.getName());
+        assertEquals("alice@gmail.com", dto.getEmail());
+        assertEquals("123", dto.getContact());
+        assertEquals("Hello", dto.getMessage());
+    }
+
 }
