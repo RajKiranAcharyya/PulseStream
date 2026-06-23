@@ -85,4 +85,16 @@ public class CustomUserDetailsServiceTest {
         assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DOCTOR")));
     }
 
+    @Test
+    public void testLoadUserByUsername_PatientSuccess() {
+        when(request.getParameter("loginRole")).thenReturn("PATIENT");
+        Patient patient = new Patient(1L, false, "John", "Doe", "Male", "patient@gmail.com", "123", "pass");
+        when(patientRepository.findByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername("patient@gmail.com");
+        assertNotNull(userDetails);
+        assertEquals("patient@gmail.com", userDetails.getUsername());
+        assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_PATIENT")));
+    }
+
 }
