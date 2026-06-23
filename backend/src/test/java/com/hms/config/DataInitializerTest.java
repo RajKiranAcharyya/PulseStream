@@ -52,4 +52,18 @@ public class DataInitializerTest {
         verify(adminRepository, times(1)).save(any(Admin.class));
     }
 
+    @Test
+    public void testRun_AdminExistsPlaintextPassword() throws Exception {
+        when(adminRepository.count()).thenReturn(1L);
+        Admin admin = new Admin("admin", "plain12", "admin@hms.com");
+        when(adminRepository.findAll()).thenReturn(Arrays.asList(admin));
+        when(passwordEncoder.encode("plain12")).thenReturn("encodedPassword60Chars");
+        when(doctorRepository.findAll()).thenReturn(Collections.emptyList());
+        when(patientRepository.findAll()).thenReturn(Collections.emptyList());
+
+        dataInitializer.run();
+
+        verify(adminRepository, times(1)).save(admin);
+    }
+
 }
