@@ -12,4 +12,16 @@ public class PatientRegistrationDTOTest {
         assertNull(dto.getEmail());
     }
 
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        PatientRegistrationDTO dto = new PatientRegistrationDTO("John", "Doe", "Male", "john@gmail.com", "1234567890", "pass123");
+
+        assertEquals("John", dto.getFname());
+        assertEquals("Doe", dto.getLname());
+        assertEquals("Male", dto.getGender());
+        assertEquals("john@gmail.com", dto.getEmail());
+        assertEquals("1234567890", dto.getContact());
+        assertEquals("pass123", dto.getPassword());
+    }
+
 }
