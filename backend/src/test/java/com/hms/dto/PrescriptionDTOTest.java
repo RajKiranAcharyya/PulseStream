@@ -5,4 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PrescriptionDTOTest {
 
+    @Test
+    public void testNoArgsConstructor() {
+        PrescriptionDTO dto = new PrescriptionDTO();
+        assertNull(dto.getPrescription());
+        assertNull(dto.getDisease());
+    }
+
 }
