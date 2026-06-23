@@ -109,4 +109,13 @@ public class AdminControllerTest {
                 .andExpect(content().string("Doctor with this username already exists"));
     }
 
+    @Test
+    public void testRemoveDoctor() throws Exception {
+        doNothing().when(doctorService).removeDoctor("smith@gmail.com");
+
+        mockMvc.perform(delete("/api/admin/remove-doctor/smith@gmail.com"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Doctor removed"));
+    }
+
 }
