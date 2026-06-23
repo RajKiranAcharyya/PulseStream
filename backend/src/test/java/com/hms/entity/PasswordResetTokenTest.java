@@ -52,4 +52,11 @@ public class PasswordResetTokenTest {
         obj.setToken("uuid-1");
         assertEquals("uuid-1", obj.getToken());
     }
+
+    @Test
+    public void testSetToken_Variant2() {
+        PasswordResetToken obj = new PasswordResetToken();
+        obj.setToken("uuid-2");
+        assertEquals("uuid-2", obj.getToken());
+    }
 }
