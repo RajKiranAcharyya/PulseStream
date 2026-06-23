@@ -49,4 +49,11 @@ public class AvailabilityServiceTest {
         assertEquals(1L, result.getId());
     }
 
+    @Test
+    public void testRemoveAvailability() {
+        doNothing().when(availabilityRepository).deleteById(1L);
+        availabilityService.removeAvailability(1L);
+        verify(availabilityRepository, times(1)).deleteById(1L);
+    }
+
 }
