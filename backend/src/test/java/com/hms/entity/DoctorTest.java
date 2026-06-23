@@ -76,4 +76,11 @@ public class DoctorTest {
         obj.setEmail("doc_d@hms.com");
         assertEquals("doc_d@hms.com", obj.getEmail());
     }
+
+    @Test
+    public void testSetUsername_Variant1() {
+        Doctor obj = new Doctor();
+        obj.setUsername("dr_a");
+        assertEquals("dr_a", obj.getUsername());
+    }
 }
