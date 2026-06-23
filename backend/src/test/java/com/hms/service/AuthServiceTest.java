@@ -59,4 +59,19 @@ public class AuthServiceTest {
         assertEquals("Email not found", result);
     }
 
+    @Test
+    public void testCreateResetToken_SuccessForPatient() {
+        String email = "patient@gmail.com";
+        when(adminRepository.existsByEmail(email)).thenReturn(false);
+        when(doctorRepository.existsByEmail(email)).thenReturn(false);
+        when(patientRepository.existsByEmail(email)).thenReturn(true);
+        doNothing().when(tokenRepository).deleteByEmail(email);
+
+        String result = authService.createResetToken(email);
+        assertEquals("Success", result);
+        verify(tokenRepository, times(1)).deleteByEmail(email);
+        verify(tokenRepository, times(1)).save(any(PasswordResetToken.class));
+        verify(emailService, times(1)).sendEmail(eq(email), anyString(), anyString());
+    }
+
 }
