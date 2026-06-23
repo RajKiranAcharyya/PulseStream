@@ -73,4 +73,16 @@ public class CustomUserDetailsServiceTest {
         });
     }
 
+    @Test
+    public void testLoadUserByUsername_DoctorSuccess() {
+        when(request.getParameter("loginRole")).thenReturn("DOCTOR");
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "pass", "Cardio", 500);
+        when(doctorRepository.findById("doc@gmail.com")).thenReturn(Optional.of(doctor));
+
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername("doc@gmail.com");
+        assertNotNull(userDetails);
+        assertEquals("doc@gmail.com", userDetails.getUsername());
+        assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DOCTOR")));
+    }
+
 }
