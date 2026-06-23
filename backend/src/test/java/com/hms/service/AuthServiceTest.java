@@ -84,4 +84,13 @@ public class AuthServiceTest {
         assertEquals("user@hms.com", result.get());
     }
 
+    @Test
+    public void testValidateToken_Expired() {
+        PasswordResetToken token = new PasswordResetToken("token-123", "user@hms.com", -5);
+        when(tokenRepository.findByToken("token-123")).thenReturn(Optional.of(token));
+
+        Optional<String> result = authService.validateToken("token-123");
+        assertTrue(result.isEmpty());
+    }
+
 }
