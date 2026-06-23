@@ -48,4 +48,13 @@ public class AdminControllerTest {
                 .andExpect(content().json("[]"));
     }
 
+    @Test
+    public void testRemovePatient() throws Exception {
+        doNothing().when(patientService).deletePatient(1L);
+
+        mockMvc.perform(delete("/api/admin/remove-patient/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Patient removed"));
+    }
+
 }
