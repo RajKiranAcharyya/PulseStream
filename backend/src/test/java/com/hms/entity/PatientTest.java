@@ -94,4 +94,11 @@ public class PatientTest {
         obj.setLname("Smith");
         assertEquals("Smith", obj.getLname());
     }
+
+    @Test
+    public void testSetLname_Variant2() {
+        Patient obj = new Patient();
+        obj.setLname("Jones");
+        assertEquals("Jones", obj.getLname());
+    }
 }
