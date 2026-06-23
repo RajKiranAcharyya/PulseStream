@@ -181,4 +181,11 @@ public class DoctorTest {
         obj.setDocFees(500);
         assertEquals(500, obj.getDocFees());
     }
+
+    @Test
+    public void testSetDocfees_Variant4() {
+        Doctor obj = new Doctor();
+        obj.setDocFees(600);
+        assertEquals(600, obj.getDocFees());
+    }
 }
