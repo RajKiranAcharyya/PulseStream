@@ -74,4 +74,11 @@ public class AdminTest {
         obj.setPassword("securePass2");
         assertEquals("securePass2", obj.getPassword());
     }
+
+    @Test
+    public void testSetPassword_Variant3() {
+        Admin obj = new Admin();
+        obj.setPassword("securePass3");
+        assertEquals("securePass3", obj.getPassword());
+    }
 }
