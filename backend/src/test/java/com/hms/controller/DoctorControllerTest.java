@@ -117,4 +117,13 @@ public class DoctorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testRemoveAvailability() throws Exception {
+        doNothing().when(availabilityService).removeAvailability(1L);
+
+        mockMvc.perform(delete("/api/doctor/availability/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Removed"));
+    }
+
 }
