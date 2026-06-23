@@ -81,4 +81,14 @@ public class DoctorServiceTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    public void testGetDoctorByUsername_Found() {
+        Doctor doc = new Doctor("doc@gmail.com", false, "dr_jones", "pass", "A", 100);
+        when(doctorRepository.findByUsername("dr_jones")).thenReturn(Optional.of(doc));
+
+        Optional<Doctor> result = doctorService.getDoctorByUsername("dr_jones");
+        assertTrue(result.isPresent());
+        assertEquals("dr_jones", result.get().getUsername());
+    }
+
 }
