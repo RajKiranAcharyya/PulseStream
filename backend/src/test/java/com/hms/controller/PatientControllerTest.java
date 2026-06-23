@@ -127,4 +127,17 @@ public class PatientControllerTest {
                 .andExpect(content().string("Cancelled"));
     }
 
+    @Test
+    public void testGetPrescriptions() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("patient@gmail.com");
+        Patient patient = new Patient();
+        patient.setPid(1L);
+        when(patientService.getPatientByEmail("patient@gmail.com")).thenReturn(Optional.of(patient));
+        when(prescriptionService.getPatientPrescriptions(1L)).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/patient/prescriptions").principal(auth))
+                .andExpect(status().isOk());
+    }
+
 }
