@@ -40,4 +40,10 @@ public class DoctorRegistrationDTOTest {
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
+    @Test
+    public void testToString() {
+        DoctorRegistrationDTO dto = new DoctorRegistrationDTO();
+        assertNotNull(dto.toString());
+    }
+
 }
