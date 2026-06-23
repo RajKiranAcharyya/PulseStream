@@ -58,84 +58,147 @@ PulseStream
 │   │── pom.xml
 │   │
 │   └── src
-│       └── main
-│           ├── java
-│           │   └── com
-│           │       └── hms
-│           │           │── HospitalManagementSystemApplication.java
-│           │           │
-│           │           ├── config
-│           │           │   │── CustomUserDetails.java
-│           │           │   │── CustomUserDetailsService.java
-│           │           │   │── DataInitializer.java
-│           │           │   │── SecurityConfig.java
-│           │           │
-│           │           ├── controller
-│           │           │   │── AdminController.java
-│           │           │   │── AuthController.java
-│           │           │   │── DashboardController.java
-│           │           │   │── DoctorController.java
-│           │           │   │── PatientController.java
-│           │           │   │── PublicController.java
-│           │           │
-│           │           ├── entity
-│           │           │   │── Admin.java
-│           │           │   │── Appointment.java
-│           │           │   │── Availability.java
-│           │           │   │── ContactMessage.java
-│           │           │   │── Doctor.java
-│           │           │   │── PasswordResetToken.java
-│           │           │   │── Patient.java
-│           │           │   │── Prescription.java
-│           │           │
-│           │           ├── repository
-│           │           │   │── AdminRepository.java
-│           │           │   │── AppointmentRepository.java
-│           │           │   │── AvailabilityRepository.java
-│           │           │   │── ContactMessageRepository.java
-│           │           │   │── DoctorRepository.java
-│           │           │   │── PasswordResetTokenRepository.java
-│           │           │   │── PatientRepository.java
-│           │           │   │── PrescriptionRepository.java
-│           │           │
-│           │           ├── service
-│           │           │   │── AppointmentService.java
-│           │           │   │── AuthService.java
-│           │           │   │── AvailabilityService.java
-│           │           │   │── ContactService.java
-│           │           │   │── DoctorService.java
-│           │           │   │── EmailService.java
-│           │           │   │── PatientService.java
-│           │           │   │── PrescriptionService.java
-│           │           │   │── ReminderScheduler.java
-│           │           │
-│           │           └── util
-│           │               │── DataSeeder.java
-│           │
-│           └── resources
-│               │── application.properties
-│               │── application-local.properties
-│               │
-│               └── static
-│                   │── admin_dashboard.html
-│                   │── contact.html
-│                   │── doctor_dashboard.html
-│                   │── forgot_password.html
-│                   │── index.html
-│                   │── index1.html
-│                   │── patient_dashboard.html
-│                   │── reset_password.html
-│                   │── services.html
-│                   │
-│                   ├── css
-│                   │   │── modern.css
-│                   │
-│                   ├── images
-│                   │   │── favicon.png
-│                   │   │── logo.png
-│                   │
-│                   └── js
-│                       │── modern.js
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── hms
+│       │   │           │── HospitalManagementSystemApplication.java
+│       │   │           │
+│       │   │           ├── config
+│       │   │           │   │── CustomUserDetails.java
+│       │   │           │   │── CustomUserDetailsService.java
+│       │   │           │   │── DataInitializer.java
+│       │   │           │   │── SecurityConfig.java
+│       │   │           │
+│       │   │           ├── controller
+│       │   │           │   │── AdminController.java
+│       │   │           │   │── AuthController.java
+│       │   │           │   │── DashboardController.java
+│       │   │           │   │── DoctorController.java
+│       │   │           │   │── PatientController.java
+│       │   │           │   │── PublicController.java
+│       │   │           │
+│       │   │           ├── entity
+│       │   │           │   │── Admin.java
+│       │   │           │   │── Appointment.java
+│       │   │           │   │── Availability.java
+│       │   │           │   │── ContactMessage.java
+│       │   │           │   │── Doctor.java
+│       │   │           │   │── PasswordResetToken.java
+│       │   │           │   │── Patient.java
+│       │   │           │   │── Prescription.java
+│       │   │           │
+│       │   │           ├── repository
+│       │   │           │   │── AdminRepository.java
+│       │   │           │   │── AppointmentRepository.java
+│       │   │           │   │── AvailabilityRepository.java
+│       │   │           │   │── ContactMessageRepository.java
+│       │   │           │   │── DoctorRepository.java
+│       │   │           │   │── PasswordResetTokenRepository.java
+│       │   │           │   │── PatientRepository.java
+│       │   │           │   │── PrescriptionRepository.java
+│       │   │           │
+│       │   │           ├── service
+│       │   │           │   │── AppointmentService.java
+│       │   │           │   │── AuthService.java
+│       │   │           │   │── AvailabilityService.java
+│       │   │           │   │── ContactService.java
+│       │   │           │   │── DoctorService.java
+│       │   │           │   │── EmailService.java
+│       │   │           │   │── PatientService.java
+│       │   │           │   │── PrescriptionService.java
+│       │   │           │   │── ReminderScheduler.java
+│       │   │           │
+│       │   │           └── util
+│       │   │               │── DataSeeder.java
+│       │   │
+│       │   └── resources
+│       │       │── application.properties
+│       │       │── application-local.properties
+│       │       │
+│       │       └── static
+│       │           │── admin_dashboard.html
+│       │           │── contact.html
+│       │           │── doctor_dashboard.html
+│       │           │── forgot_password.html
+│       │           │── index.html
+│       │           │── index1.html
+│       │           │── patient_dashboard.html
+│       │           │── reset_password.html
+│       │           │── services.html
+│       │           │
+│       │           ├── css
+│       │           │   │── modern.css
+│       │           │
+│       │           ├── images
+│       │           │   │── favicon.png
+│       │           │   │── logo.png
+│       │           │
+│       │           └── js
+│       │               │── modern.js
+│
+│       └── test
+│           └── java
+│               └── com
+│                   └── hms
+│                       │── HospitalManagementSystemApplicationTest.java
+│                       │
+│                       ├── config
+│                       │   │── CustomUserDetailsServiceTest.java
+│                       │   │── CustomUserDetailsTest.java
+│                       │   │── DataInitializerTest.java
+│                       │
+│                       ├── controller
+│                       │   │── AdminControllerTest.java
+│                       │   │── AuthControllerTest.java
+│                       │   │── DashboardControllerTest.java
+│                       │   │── DoctorControllerTest.java
+│                       │   │── PatientControllerTest.java
+│                       │   │── PublicControllerTest.java
+│                       │
+│                       ├── dto
+│                       │   │── AppointmentBookingDTOTest.java
+│                       │   │── AvailabilityDTOTest.java
+│                       │   │── ContactMessageDTOTest.java
+│                       │   │── DoctorProfileDTOTest.java
+│                       │   │── DoctorRegistrationDTOTest.java
+│                       │   │── PatientProfileDTOTest.java
+│                       │   │── PatientRegistrationDTOTest.java
+│                       │   │── PrescriptionDTOTest.java
+│                       │
+│                       ├── entity
+│                       │   │── AdminTest.java
+│                       │   │── AppointmentTest.java
+│                       │   │── AvailabilityTest.java
+│                       │   │── ContactMessageTest.java
+│                       │   │── DoctorTest.java
+│                       │   │── PasswordResetTokenTest.java
+│                       │   │── PatientTest.java
+│                       │   │── PrescriptionTest.java
+│                       │
+│                       ├── repository
+│                       │   │── AdminRepositoryTest.java
+│                       │   │── AppointmentRepositoryTest.java
+│                       │   │── AvailabilityRepositoryTest.java
+│                       │   │── ContactMessageRepositoryTest.java
+│                       │   │── DoctorRepositoryTest.java
+│                       │   │── PasswordResetTokenRepositoryTest.java
+│                       │   │── PatientRepositoryTest.java
+│                       │   │── PrescriptionRepositoryTest.java
+│                       │
+│                       ├── service
+│                       │   │── AppointmentServiceTest.java
+│                       │   │── AuthServiceTest.java
+│                       │   │── AvailabilityServiceTest.java
+│                       │   │── ContactServiceTest.java
+│                       │   │── DoctorServiceTest.java
+│                       │   │── EmailServiceTest.java
+│                       │   │── PatientServiceTest.java
+│                       │   │── PrescriptionServiceTest.java
+│                       │   │── ReminderSchedulerTest.java
+│                       │
+│                       └── util
+│                           └── DataSeederTest.java
 │
 └── frontend
     │── admin_dashboard.html
