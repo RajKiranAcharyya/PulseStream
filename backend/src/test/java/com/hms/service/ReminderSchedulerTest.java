@@ -31,4 +31,15 @@ public class ReminderSchedulerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testSendDailyReminders_NoAppointments() {
+        LocalDate today = LocalDate.now();
+        when(appointmentRepository.findByAppdateAndUserStatusAndDoctorStatus(today, 1, 1))
+                .thenReturn(Collections.emptyList());
+
+        reminderScheduler.sendDailyReminders();
+
+        verify(emailService, never()).sendEmail(anyString(), anyString(), anyString());
+    }
+
 }
