@@ -102,4 +102,19 @@ public class DoctorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testAddAvailability() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+
+        Availability availability = new Availability(1L, "doc@gmail.com", "Monday", LocalTime.of(9,0), LocalTime.of(12,0), false);
+        when(availabilityService.addAvailability(any(Availability.class))).thenReturn(availability);
+
+        mockMvc.perform(post("/api/doctor/availability")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"dayOfWeek\":\"Monday\",\"startTime\":\"09:00:00\",\"endTime\":\"12:00:00\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
