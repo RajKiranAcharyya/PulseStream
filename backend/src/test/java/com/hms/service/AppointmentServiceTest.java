@@ -93,4 +93,89 @@ public class AppointmentServiceTest {
         appointmentService.deleteAppointment(1L);
         verify(appointmentRepository, times(1)).deleteById(1L);
     }
+
+    @Test
+    public void testBookAppointment_Success() {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.of(10, 0);
+        Appointment app = new Appointment();
+        app.setDoctor("Dr. Smith");
+        app.setAppdate(date);
+        app.setApptime(time);
+        app.setEmail("patient@gmail.com");
+        app.setFname("John");
+
+        when(appointmentRepository.findOccupiedTimes("Dr. Smith", date)).thenReturn(Arrays.asList());
+        when(appointmentRepository.save(app)).thenReturn(app);
+
+        Appointment result = appointmentService.bookAppointment(app);
+        assertNotNull(result);
+        assertEquals(1, result.getUserStatus());
+        assertEquals(1, result.getDoctorStatus());
+        verify(emailService, times(1)).sendEmail(eq("patient@gmail.com"), anyString(), anyString());
+    }
+
+    @Test
+    public void testBookAppointment_ThrowsConflictException() {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.of(10, 0);
+        Appointment app = new Appointment();
+        app.setDoctor("Dr. Smith");
+        app.setAppdate(date);
+        app.setApptime(time);
+
+        when(appointmentRepository.findOccupiedTimes("Dr. Smith", date)).thenReturn(Arrays.asList(time));
+
+        assertThrows(RuntimeException.class, () -> {
+            appointmentService.bookAppointment(app);
+        });
+    }
+
+    @Test
+    public void testCancelByPatient_Success() {
+        Appointment app = new Appointment();
+        app.setId(1L);
+        app.setEmail("patient@gmail.com");
+        app.setDoctor("Dr. Smith");
+        app.setAppdate(LocalDate.now());
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(app));
+        when(appointmentRepository.save(app)).thenReturn(app);
+
+        appointmentService.cancelByPatient(1L);
+        assertEquals(0, app.getUserStatus());
+        verify(emailService, times(1)).sendEmail(eq("patient@gmail.com"), anyString(), anyString());
+    }
+
+    @Test
+    public void testCancelByDoctor_Success() {
+        Appointment app = new Appointment();
+        app.setId(1L);
+        app.setEmail("patient@gmail.com");
+        app.setDoctor("Dr. Smith");
+        app.setAppdate(LocalDate.now());
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(app));
+        when(appointmentRepository.save(app)).thenReturn(app);
+
+        appointmentService.cancelByDoctor(1L);
+        assertEquals(0, app.getDoctorStatus());
+        verify(emailService, times(1)).sendEmail(eq("patient@gmail.com"), anyString(), anyString());
+    }
+
+    @Test
+    public void testPrescribeByDoctor_Success() {
+        Appointment app = new Appointment();
+        app.setId(1L);
+        app.setEmail("patient@gmail.com");
+        app.setDoctor("Dr. Smith");
+        app.setAppdate(LocalDate.now());
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(app));
+        when(appointmentRepository.save(app)).thenReturn(app);
+
+        appointmentService.prescribeByDoctor(1L);
+        assertEquals(2, app.getDoctorStatus());
+        verify(emailService, times(1)).sendEmail(eq("patient@gmail.com"), anyString(), anyString());
+    }
 }
