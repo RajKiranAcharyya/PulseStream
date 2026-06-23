@@ -62,4 +62,11 @@ public class AvailabilityTest {
         obj.setDoctorEmail("doc_jones@gmail.com");
         assertEquals("doc_jones@gmail.com", obj.getDoctorEmail());
     }
+
+    @Test
+    public void testSetDoctoremail_Variant3() {
+        Availability obj = new Availability();
+        obj.setDoctorEmail("doc_taylor@gmail.com");
+        assertEquals("doc_taylor@gmail.com", obj.getDoctorEmail());
+    }
 }
