@@ -59,4 +59,14 @@ public class PrescriptionServiceTest {
         assertEquals("Dr. Smith", result.get(0).getDoctor());
     }
 
+    @Test
+    public void testGetAllPrescriptions() {
+        Prescription p1 = new Prescription();
+        Prescription p2 = new Prescription();
+        when(prescriptionRepository.findAll()).thenReturn(Arrays.asList(p1, p2));
+
+        List<Prescription> result = prescriptionService.getAllPrescriptions();
+        assertEquals(2, result.size());
+    }
+
 }
