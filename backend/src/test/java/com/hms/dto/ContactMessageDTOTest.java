@@ -22,4 +22,12 @@ public class ContactMessageDTOTest {
         assertEquals("Hello", dto.getMessage());
     }
 
+    @Test
+    public void testSetters() {
+        ContactMessageDTO dto = new ContactMessageDTO();
+        dto.setName("Bob");
+
+        assertEquals("Bob", dto.getName());
+    }
+
 }
