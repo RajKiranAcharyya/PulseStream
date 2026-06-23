@@ -39,4 +39,15 @@ public class AppointmentBookingDTOTest {
         assertEquals(25, dto.getAge());
     }
 
+    @Test
+    public void testEqualsAndHashCode() {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.of(10, 0);
+        AppointmentBookingDTO dto1 = new AppointmentBookingDTO("Dr. Smith", date, time, "Flu", 30, 500);
+        AppointmentBookingDTO dto2 = new AppointmentBookingDTO("Dr. Smith", date, time, "Flu", 30, 500);
+
+        assertEquals(dto1, dto2);
+        assertEquals(dto1.hashCode(), dto2.hashCode());
+    }
+
 }
