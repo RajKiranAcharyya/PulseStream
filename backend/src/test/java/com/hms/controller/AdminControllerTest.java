@@ -66,4 +66,24 @@ public class AdminControllerTest {
                 .andExpect(content().json("[]"));
     }
 
+    @Test
+    public void testAddDoctor_Success() throws Exception {
+        DoctorRegistrationDTO dto = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "Cardiology", 500, "pass123");
+        when(doctorService.getDoctorByEmail(dto.getEmail())).thenReturn(Optional.empty());
+        when(doctorService.getDoctorByUsername(dto.getUsername())).thenReturn(Optional.empty());
+        
+        Doctor doctor = new Doctor();
+        doctor.setUsername(dto.getUsername());
+        doctor.setEmail(dto.getEmail());
+        doctor.setSpec(dto.getSpec());
+        doctor.setDocFees(dto.getDocFees());
+        doctor.setPassword(dto.getPassword());
+        when(doctorService.addDoctor(any(Doctor.class))).thenReturn(doctor);
+
+        mockMvc.perform(post("/api/admin/add-doctor")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"dr_smith\",\"email\":\"smith@gmail.com\",\"spec\":\"Cardiology\",\"docFees\":500,\"password\":\"pass123\"}"))
+                .andExpect(status().isOk());
+    }
+
 }
