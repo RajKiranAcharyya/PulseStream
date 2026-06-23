@@ -230,4 +230,11 @@ public class AppointmentTest {
         obj.setDoctor("Dr. Brown");
         assertEquals("Dr. Brown", obj.getDoctor());
     }
+
+    @Test
+    public void testSetAge_Variant1() {
+        Appointment obj = new Appointment();
+        obj.setAge(18);
+        assertEquals(18, obj.getAge());
+    }
 }
