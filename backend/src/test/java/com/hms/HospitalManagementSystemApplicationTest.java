@@ -5,4 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HospitalManagementSystemApplicationTest {
 
+    @Test
+    public void testInstantiation() {
+        HospitalManagementSystemApplication app = new HospitalManagementSystemApplication();
+        assertNotNull(app);
+    }
+
 }
