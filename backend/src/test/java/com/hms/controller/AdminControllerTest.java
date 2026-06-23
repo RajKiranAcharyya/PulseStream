@@ -68,7 +68,7 @@ public class AdminControllerTest {
 
     @Test
     public void testAddDoctor_Success() throws Exception {
-        DoctorRegistrationDTO dto = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "Cardiology", 500, "pass123");
+        DoctorRegistrationDTO dto = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "pass123", "Cardiology", 500);
         when(doctorService.getDoctorByEmail(dto.getEmail())).thenReturn(Optional.empty());
         when(doctorService.getDoctorByUsername(dto.getUsername())).thenReturn(Optional.empty());
         

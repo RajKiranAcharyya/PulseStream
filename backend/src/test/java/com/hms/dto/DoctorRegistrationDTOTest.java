@@ -14,13 +14,13 @@ public class DoctorRegistrationDTOTest {
 
     @Test
     public void testAllArgsConstructorAndGetters() {
-        DoctorRegistrationDTO dto = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "Cardiology", 500, "pass123");
+        DoctorRegistrationDTO dto = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "pass123", "Cardiology", 500);
 
         assertEquals("dr_smith", dto.getUsername());
         assertEquals("smith@gmail.com", dto.getEmail());
+        assertEquals("pass123", dto.getPassword());
         assertEquals("Cardiology", dto.getSpec());
         assertEquals(500, dto.getDocFees());
-        assertEquals("pass123", dto.getPassword());
     }
 
     @Test
@@ -33,8 +33,8 @@ public class DoctorRegistrationDTOTest {
 
     @Test
     public void testEqualsAndHashCode() {
-        DoctorRegistrationDTO dto1 = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "Cardiology", 500, "pass123");
-        DoctorRegistrationDTO dto2 = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "Cardiology", 500, "pass123");
+        DoctorRegistrationDTO dto1 = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "pass123", "Cardiology", 500);
+        DoctorRegistrationDTO dto2 = new DoctorRegistrationDTO("dr_smith", "smith@gmail.com", "pass123", "Cardiology", 500);
 
         assertEquals(dto1, dto2);
         assertEquals(dto1.hashCode(), dto2.hashCode());
