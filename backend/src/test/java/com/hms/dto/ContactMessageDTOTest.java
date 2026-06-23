@@ -30,4 +30,13 @@ public class ContactMessageDTOTest {
         assertEquals("Bob", dto.getName());
     }
 
+    @Test
+    public void testEqualsAndHashCode() {
+        ContactMessageDTO dto1 = new ContactMessageDTO("Alice", "alice@gmail.com", "123", "Hello");
+        ContactMessageDTO dto2 = new ContactMessageDTO("Alice", "alice@gmail.com", "123", "Hello");
+
+        assertEquals(dto1, dto2);
+        assertEquals(dto1.hashCode(), dto2.hashCode());
+    }
+
 }
