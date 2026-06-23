@@ -30,4 +30,10 @@ public class CustomUserDetailsTest {
         assertTrue(userDetails.isAccountNonLocked());
     }
 
+    @Test
+    public void testCredentialsNonExpired() {
+        CustomUserDetails userDetails = new CustomUserDetails("user", "pass", "ROLE_USER");
+        assertTrue(userDetails.isCredentialsNonExpired());
+    }
+
 }
