@@ -43,4 +43,12 @@ public class EmailServiceTest {
         verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
     }
 
+    @Test
+    public void testSendEmail_Failure() {
+        doThrow(new RuntimeException("Mail server down")).when(mailSender).send(any(SimpleMailMessage.class));
+        emailService.sendEmail("to@gmail.com", "Subject", "Body");
+        // Should catch the exception and print error, no propagation
+        verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
+    }
+
 }
