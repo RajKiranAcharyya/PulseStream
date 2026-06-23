@@ -50,4 +50,15 @@ public class DashboardControllerTest {
                 .andExpect(redirectedUrl("/doctor_dashboard.html"));
     }
 
+    @Test
+    public void testDashboard_PatientRedirect() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_PATIENT")))
+                .when(auth).getAuthorities();
+
+        mockMvc.perform(get("/dashboard").principal(auth))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/patient_dashboard.html"));
+    }
+
 }
