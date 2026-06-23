@@ -57,4 +57,14 @@ public class PatientServiceTest {
         assertEquals(2, result.size());
     }
 
+    @Test
+    public void testGetPatientByEmail_Found() {
+        Patient p = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "12345", "pass");
+        when(patientRepository.findByEmail("john@gmail.com")).thenReturn(Optional.of(p));
+
+        Optional<Patient> result = patientService.getPatientByEmail("john@gmail.com");
+        assertTrue(result.isPresent());
+        assertEquals("john@gmail.com", result.get().getEmail());
+    }
+
 }
