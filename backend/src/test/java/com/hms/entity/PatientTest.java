@@ -199,4 +199,11 @@ public class PatientTest {
         obj.setContact("99994");
         assertEquals("99994", obj.getContact());
     }
+
+    @Test
+    public void testSetPassword_Variant1() {
+        Patient obj = new Patient();
+        obj.setPassword("pass1");
+        assertEquals("pass1", obj.getPassword());
+    }
 }
