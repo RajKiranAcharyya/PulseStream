@@ -36,4 +36,15 @@ public class AuthControllerTest {
                 .andExpect(content().string("Reset link sent to your email."));
     }
 
+    @Test
+    public void testForgotPassword_NotFound() throws Exception {
+        when(authService.createResetToken("user@hms.com")).thenReturn("Email not found");
+
+        mockMvc.perform(post("/api/auth/forgot-password")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"user@hms.com\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Email not found"));
+    }
+
 }
