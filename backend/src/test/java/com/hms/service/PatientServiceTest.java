@@ -32,4 +32,19 @@ public class PatientServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testRegisterPatient() {
+        Patient patient = new Patient(null, false, "John", "Doe", "Male", "john@gmail.com", "12345", "rawPass");
+        when(passwordEncoder.encode("rawPass")).thenReturn("encodedPass");
+
+        Patient savedPatient = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "12345", "encodedPass");
+        when(patientRepository.save(any(Patient.class))).thenReturn(savedPatient);
+
+        Patient result = patientService.registerPatient(patient);
+        assertNotNull(result);
+        assertEquals(1L, result.getPid());
+        assertEquals("encodedPass", result.getPassword());
+        verify(patientRepository, times(1)).save(patient);
+    }
+
 }
