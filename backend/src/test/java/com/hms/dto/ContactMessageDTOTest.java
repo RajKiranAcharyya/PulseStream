@@ -39,4 +39,10 @@ public class ContactMessageDTOTest {
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
+    @Test
+    public void testToString() {
+        ContactMessageDTO dto = new ContactMessageDTO();
+        assertNotNull(dto.toString());
+    }
+
 }
