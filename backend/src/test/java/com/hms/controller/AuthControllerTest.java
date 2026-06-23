@@ -69,4 +69,13 @@ public class AuthControllerTest {
                 .andExpect(content().string("Invalid or expired token."));
     }
 
+    @Test
+    public void testValidateToken_Success() throws Exception {
+        when(authService.validateToken("token-123")).thenReturn(Optional.of("user@hms.com"));
+
+        mockMvc.perform(get("/api/auth/validate-token")
+                .param("token", "token-123"))
+                .andExpect(status().isOk());
+    }
+
 }
