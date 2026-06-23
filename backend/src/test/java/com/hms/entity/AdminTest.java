@@ -88,4 +88,11 @@ public class AdminTest {
         obj.setPassword("securePass4");
         assertEquals("securePass4", obj.getPassword());
     }
+
+    @Test
+    public void testSetEmail_Variant1() {
+        Admin obj = new Admin();
+        obj.setEmail("support@hms.com");
+        assertEquals("support@hms.com", obj.getEmail());
+    }
 }
