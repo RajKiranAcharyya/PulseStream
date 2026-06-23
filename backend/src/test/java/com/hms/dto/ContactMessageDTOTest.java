@@ -73,4 +73,11 @@ public class ContactMessageDTOTest {
         obj.setName("User_D");
         assertEquals("User_D", obj.getName());
     }
+
+    @Test
+    public void testSetEmail_Variant1() {
+        ContactMessageDTO obj = new ContactMessageDTO();
+        obj.setEmail("a@gmail.com");
+        assertEquals("a@gmail.com", obj.getEmail());
+    }
 }
