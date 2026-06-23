@@ -31,4 +31,16 @@ public class EmailServiceTest {
         // Should print to console, no exceptions thrown
     }
 
+    @Test
+    public void testSendEmail_Success() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("to@gmail.com");
+        message.setSubject("Subject");
+        message.setText("Body");
+        doNothing().when(mailSender).send(any(SimpleMailMessage.class));
+
+        emailService.sendEmail("to@gmail.com", "Subject", "Body");
+        verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
+    }
+
 }
