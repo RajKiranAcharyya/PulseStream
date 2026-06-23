@@ -163,4 +163,17 @@ public class DoctorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testUpdateProfile_Failure() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("doc@gmail.com");
+        when(doctorService.getDoctorByEmail("doc@gmail.com")).thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/api/doctor/profile")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"new_name\",\"spec\":\"Pediatrics\",\"docFees\":600}"))
+                .andExpect(status().isBadRequest());
+    }
+
 }
