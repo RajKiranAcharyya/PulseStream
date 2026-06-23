@@ -74,4 +74,14 @@ public class AuthServiceTest {
         verify(emailService, times(1)).sendEmail(eq(email), anyString(), anyString());
     }
 
+    @Test
+    public void testValidateToken_Success() {
+        PasswordResetToken token = new PasswordResetToken("token-123", "user@hms.com", 10);
+        when(tokenRepository.findByToken("token-123")).thenReturn(Optional.of(token));
+
+        Optional<String> result = authService.validateToken("token-123");
+        assertTrue(result.isPresent());
+        assertEquals("user@hms.com", result.get());
+    }
+
 }
