@@ -84,4 +84,17 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testBookAppointment_PastDate() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        LocalDate pastDate = LocalDate.now().minusDays(1);
+
+        mockMvc.perform(post("/api/patient/book")
+                .principal(auth)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"doctor\":\"Dr. Smith\",\"appdate\":\"" + pastDate + "\",\"apptime\":\"10:00:00\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Cannot book appointments for past dates."));
+    }
+
 }
