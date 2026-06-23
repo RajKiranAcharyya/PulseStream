@@ -118,4 +118,13 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testCancelAppointment() throws Exception {
+        doNothing().when(appointmentService).cancelByPatient(1L);
+
+        mockMvc.perform(post("/api/patient/cancel/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Cancelled"));
+    }
+
 }
