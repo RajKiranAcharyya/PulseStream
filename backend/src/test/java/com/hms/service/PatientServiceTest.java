@@ -67,4 +67,12 @@ public class PatientServiceTest {
         assertEquals("john@gmail.com", result.get().getEmail());
     }
 
+    @Test
+    public void testGetPatientByEmail_NotFound() {
+        when(patientRepository.findByEmail("none@gmail.com")).thenReturn(Optional.empty());
+
+        Optional<Patient> result = patientService.getPatientByEmail("none@gmail.com");
+        assertTrue(result.isEmpty());
+    }
+
 }
