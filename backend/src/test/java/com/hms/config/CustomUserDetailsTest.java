@@ -36,4 +36,10 @@ public class CustomUserDetailsTest {
         assertTrue(userDetails.isCredentialsNonExpired());
     }
 
+    @Test
+    public void testIsEnabled() {
+        CustomUserDetails userDetails = new CustomUserDetails("user", "pass", "ROLE_USER");
+        assertTrue(userDetails.isEnabled());
+    }
+
 }
