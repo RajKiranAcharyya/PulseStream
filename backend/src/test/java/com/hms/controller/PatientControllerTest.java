@@ -140,4 +140,15 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetDoctorAvailability() throws Exception {
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "pass", "Cardio", 500);
+        when(doctorService.getDoctorByUsername("dr_smith")).thenReturn(Optional.of(doctor));
+        when(availabilityService.getDoctorAvailability("doc@gmail.com")).thenReturn(Collections.emptyList());
+        when(appointmentService.getOccupiedTimes("dr_smith", LocalDate.now().plusDays(1))).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/patient/doctor-availability/dr_smith/" + LocalDate.now().plusDays(1)))
+                .andExpect(status().isOk());
+    }
+
 }
