@@ -85,4 +85,14 @@ public class PatientServiceTest {
         assertEquals(1L, result.get().getPid());
     }
 
+    @Test
+    public void testSavePatient() {
+        Patient p = new Patient(1L, false, "John", "Doe", "Male", "john@gmail.com", "12345", "pass");
+        when(patientRepository.save(p)).thenReturn(p);
+
+        Patient result = patientService.savePatient(p);
+        assertNotNull(result);
+        verify(patientRepository, times(1)).save(p);
+    }
+
 }
