@@ -56,4 +56,11 @@ public class DoctorServiceTest {
         assertEquals(2, result.size());
     }
 
+    @Test
+    public void testRemoveDoctor() {
+        doNothing().when(doctorRepository).deleteById("doc@gmail.com");
+        doctorService.removeDoctor("doc@gmail.com");
+        verify(doctorRepository, times(1)).deleteById("doc@gmail.com");
+    }
+
 }
