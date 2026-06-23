@@ -43,4 +43,16 @@ public class DataSeederTest {
         verify(availabilityRepository, never()).save(any(Availability.class));
     }
 
+    @Test
+    public void testSeedData_DoctorHasNoAvailability() {
+        Doctor doctor = new Doctor("doc@gmail.com", false, "dr_smith", "pass", "Cardio", 500);
+        when(doctorRepository.findAll()).thenReturn(Arrays.asList(doctor));
+        when(availabilityRepository.findByDoctorEmail("doc@gmail.com")).thenReturn(Collections.emptyList());
+
+        dataSeeder.seedData();
+
+        // 5 days * 3 slots (9, 10, 11) = 15 saves
+        verify(availabilityRepository, times(15)).save(any(Availability.class));
+    }
+
 }
