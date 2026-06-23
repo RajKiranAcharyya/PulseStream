@@ -28,4 +28,15 @@ public class DashboardControllerTest {
                 .andExpect(redirectedUrl("/index.html"));
     }
 
+    @Test
+    public void testDashboard_AdminRedirect() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        doReturn(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                .when(auth).getAuthorities();
+
+        mockMvc.perform(get("/dashboard").principal(auth))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin_dashboard.html"));
+    }
+
 }
