@@ -192,4 +192,11 @@ public class PatientTest {
         obj.setContact("99993");
         assertEquals("99993", obj.getContact());
     }
+
+    @Test
+    public void testSetContact_Variant4() {
+        Patient obj = new Patient();
+        obj.setContact("99994");
+        assertEquals("99994", obj.getContact());
+    }
 }
