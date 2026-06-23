@@ -1,0 +1,35 @@
+package com.hms.entity;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class AdminTest {
+
+    @Test
+    public void testDefaultConstructor() {
+        Admin admin = new Admin();
+        assertNull(admin.getUsername());
+        assertNull(admin.getPassword());
+        assertNull(admin.getEmail());
+    }
+
+    @Test
+    public void testAllArgsConstructorAndGetters() {
+        Admin admin = new Admin("admin1", "pass123", "admin1@hms.com");
+        assertEquals("admin1", admin.getUsername());
+        assertEquals("pass123", admin.getPassword());
+        assertEquals("admin1@hms.com", admin.getEmail());
+    }
+
+    @Test
+    public void testSetters() {
+        Admin admin = new Admin();
+        admin.setUsername("newAdmin");
+        admin.setPassword("newPass");
+        admin.setEmail("new@hms.com");
+
+        assertEquals("newAdmin", admin.getUsername());
+        assertEquals("newPass", admin.getPassword());
+        assertEquals("new@hms.com", admin.getEmail());
+    }
+}
