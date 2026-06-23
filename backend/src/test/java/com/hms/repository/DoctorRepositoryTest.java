@@ -8,4 +8,16 @@ import static org.mockito.Mockito.*;
 
 public class DoctorRepositoryTest {
 
+    @Test
+    public void testFindByUsername() {
+        DoctorRepository repo = mock(DoctorRepository.class);
+        Doctor doctor = new Doctor();
+        doctor.setUsername("dr_smith");
+        when(repo.findByUsername("dr_smith")).thenReturn(Optional.of(doctor));
+
+        Optional<Doctor> result = repo.findByUsername("dr_smith");
+        assertTrue(result.isPresent());
+        assertEquals("dr_smith", result.get().getUsername());
+    }
+
 }
