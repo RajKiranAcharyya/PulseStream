@@ -63,4 +63,14 @@ public class CustomUserDetailsServiceTest {
         assertTrue(userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")));
     }
 
+    @Test
+    public void testLoadUserByUsername_AdminNotFound() {
+        when(request.getParameter("loginRole")).thenReturn("ADMIN");
+        when(adminRepository.findById("admin1")).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> {
+            customUserDetailsService.loadUserByUsername("admin1");
+        });
+    }
+
 }
