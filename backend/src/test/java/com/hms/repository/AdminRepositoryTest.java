@@ -19,4 +19,12 @@ public class AdminRepositoryTest {
         assertEquals("admin", result.get().getUsername());
     }
 
+    @Test
+    public void testExistsByEmail() {
+        AdminRepository repo = mock(AdminRepository.class);
+        when(repo.existsByEmail("admin@hms.com")).thenReturn(true);
+
+        assertTrue(repo.existsByEmail("admin@hms.com"));
+    }
+
 }
