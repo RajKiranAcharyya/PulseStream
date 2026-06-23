@@ -35,4 +35,25 @@ public class PrescriptionTest {
         assertEquals("Fever", prescription.getDisease());
         assertEquals("Paracetamol 500mg", prescription.getPrescription());
     }
+
+    @Test
+    public void testSettersAndEquality() {
+        Prescription p1 = new Prescription();
+        p1.setId(10L);
+        p1.setDoctor("Dr. Wilson");
+        p1.setDeleted(true);
+
+        assertEquals(10L, p1.getId());
+        assertEquals("Dr. Wilson", p1.getDoctor());
+        assertTrue(p1.isDeleted());
+
+        Prescription p2 = new Prescription();
+        p2.setId(10L);
+        p2.setDoctor("Dr. Wilson");
+        p2.setDeleted(true);
+
+        assertEquals(p1, p2);
+        assertEquals(p1.hashCode(), p2.hashCode());
+        assertNotNull(p1.toString());
+    }
 }
