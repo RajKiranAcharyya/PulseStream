@@ -7,4 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AppointmentBookingDTOTest {
 
+    @Test
+    public void testNoArgsConstructor() {
+        AppointmentBookingDTO dto = new AppointmentBookingDTO();
+        assertNull(dto.getDoctor());
+        assertNull(dto.getAppdate());
+        assertNull(dto.getApptime());
+    }
+
 }
