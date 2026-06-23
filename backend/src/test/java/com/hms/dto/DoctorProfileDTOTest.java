@@ -59,4 +59,11 @@ public class DoctorProfileDTOTest {
         obj.setUsername("dr_jones");
         assertEquals("dr_jones", obj.getUsername());
     }
+
+    @Test
+    public void testSetUsername_Variant3() {
+        DoctorProfileDTO obj = new DoctorProfileDTO();
+        obj.setUsername("dr_taylor");
+        assertEquals("dr_taylor", obj.getUsername());
+    }
 }
