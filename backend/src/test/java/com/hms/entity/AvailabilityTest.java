@@ -76,4 +76,11 @@ public class AvailabilityTest {
         obj.setDoctorEmail("doc_brown@gmail.com");
         assertEquals("doc_brown@gmail.com", obj.getDoctorEmail());
     }
+
+    @Test
+    public void testSetDayofweek_Variant1() {
+        Availability obj = new Availability();
+        obj.setDayOfWeek("Monday");
+        assertEquals("Monday", obj.getDayOfWeek());
+    }
 }
